@@ -78,10 +78,10 @@
               
               <form method="POST" action="auth">
                 <div class="mb-3">
-                  <input type="email" class="form-control" id="floatingInput" required name="correo" placeholder="Email Address" />
+                  <input type="email" class="form-control" id="floatingInput" required name="email" placeholder="Email Address" />
                 </div>
                 <div class="mb-3">
-                  <input type="password" class="form-control" id="floatingInput1" required name="contrasenna" placeholder="Password" />
+                  <input type="password" class="form-control" id="floatingInput1" required name="password" placeholder="Password" />
                 </div>
                 <input type="hidden" name="access" value="access">
                 
