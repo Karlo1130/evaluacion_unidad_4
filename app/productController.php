@@ -51,11 +51,14 @@
                     var_dump($response);
     
                     if(isset($response) && $response['code'] == 4){
-                        header("Location: /avanzada_ids_tm_2024-main/products/");
+                        $_SESSION['message'] = "Producto agregado con éxito";
+                        $_SESSION['message_type'] = "success";
                     } else {
-                        header("Location: /avanzada_ids_tm_2024-main/products/");
+                        $_SESSION['message'] = "Hubo un error al agregar el producto";
+                        $_SESSION['message_type'] = "error";
                     }
-    
+                    
+                    header("Location: /avanzada_ids_tm_2024-main/products/");
                     break;
     
                 case "editProduct":
@@ -100,21 +103,28 @@
                     $response = json_decode($response, true);
     
                     if(isset($response) && $response['code'] == 4){
-                        header("Location:  /avanzada_ids_tm_2024-main/products/");
+                        $_SESSION['message'] = "Producto editado con éxito";
+                        $_SESSION['message_type'] = "success";
                     } else {
-                        header("Location:  /avanzada_ids_tm_2024-main/products/");
+                        $_SESSION['message'] = "Hubo un error al editar el producto";
+                        $_SESSION['message_type'] = "error";
                     }
-    
+                    header("Location:  /avanzada_ids_tm_2024-main/products/");
+                    
                     break;
     
                 case 'deleteProduct':
                     if (isset($_POST['productId'])) {
                         $productId = $_POST['productId'];
                         $productController->deleteProduct($productId);
-                        header("Location:  /avanzada_ids_tm_2024-main/products/");
+                        $_SESSION['message'] = "Producto eliminado con éxito";
+                        $_SESSION['message_type'] = "success";
                     } else {
-                        header("Location:  /avanzada_ids_tm_2024-main/products/");
+                        $_SESSION['message'] = "Hubo un error al eliminar el producto";
+                        $_SESSION['message_type'] = "error";
                     }
+                    header("Location:  /avanzada_ids_tm_2024-main/products/");
+
                     break;
             }
         }
