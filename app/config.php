@@ -4,7 +4,7 @@
 	}
 	
 	if (!defined('BASE_PATH')) {
-      define('BASE_PATH','http://localhost/avanzada_ids_tm_2024-main/');
+      define('BASE_PATH','http://localhost/examen_4/');
    	}
 
 ?>
