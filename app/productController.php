@@ -58,7 +58,7 @@
                         $_SESSION['message_type'] = "error";
                     }
                     
-                    header("Location: /avanzada_ids_tm_2024-main/products/");
+                    header("Location: ".BASE_PATH."products/");
                     break;
     
                 case "editProduct":
@@ -109,7 +109,7 @@
                         $_SESSION['message'] = "Hubo un error al editar el producto";
                         $_SESSION['message_type'] = "error";
                     }
-                    header("Location:  /avanzada_ids_tm_2024-main/products/");
+                    header("Location: ".BASE_PATH."products/");
                     
                     break;
     
@@ -123,7 +123,7 @@
                         $_SESSION['message'] = "Hubo un error al eliminar el producto";
                         $_SESSION['message_type'] = "error";
                     }
-                    header("Location:  /avanzada_ids_tm_2024-main/products/");
+                    header("Location: ".BASE_PATH."products/");
 
                     break;
             }
