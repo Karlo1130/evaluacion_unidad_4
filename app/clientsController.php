@@ -14,7 +14,7 @@
             switch ($_POST['clients']) {
                 case 'get':
                     $clients = $clientsController->get();
-                    // var_dump($clients);
+                    var_dump($clients);
                     break;
                 case 'getSpecificClient':
                     $client = $clientsController->getSpecificClient();
@@ -62,7 +62,24 @@
 
             curl_close($curl);
 
+            if (!$response) {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = "no se obtuvo una respuesta";
+
+                //TODO: cambiar la redireccion a al pantalla correspondiente
+                // header("Location: home");
+                exit;
+            }
+
             $response = json_decode($response, false);
+
+            if ($response->code == 4) {
+                $_SESSION['message_type'] = "success";
+                $_SESSION['message'] = $response->message;
+            } else {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = $response->message;
+            }
 
             return $response->data;
         }
