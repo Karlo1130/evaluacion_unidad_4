@@ -12,8 +12,7 @@
             && $_POST['global_token'] == $_SESSION['global_token']){
 
             switch($_POST["action"]){
-                case "addProduct":
-    
+                case "create":
                     
                     $name = $_POST["name"];
                     $slug = $_POST["slug"];
@@ -22,46 +21,10 @@
                     $brand_id = $_POST["brand_id"];
                     $cover = $_FILES["cover"]["tmp_name"];
     
-                    var_dump($_FILES);
-                    
-                    $sessionData = $_SESSION['data'];
-    
-                    $curl = curl_init();
-    
-                    curl_setopt_array($curl, array(
-                    CURLOPT_URL => 'https://crud.jonathansoto.mx/api/products',
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => '',
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 0,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS => array('name' => $name,'slug' => $slug,'description' => $description,'features' => $features,'brand_id' => $brand_id,'cover'=> new CURLFILE($cover)),
-                    CURLOPT_HTTPHEADER => array(
-                        'Authorization: Bearer '.$sessionData['token']),
-                    ));
-    
-                    $response = curl_exec($curl);
-    
-                    curl_close($curl);
-                    
-                    $response = json_decode($response, true);
-    
-                    var_dump($response);
-    
-                    if(isset($response) && $response['code'] == 4){
-                        $_SESSION['message'] = "Producto agregado con éxito";
-                        $_SESSION['message_type'] = "success";
-                    } else {
-                        $_SESSION['message'] = "Hubo un error al agregar el producto";
-                        $_SESSION['message_type'] = "error";
-                    }
-                    
-                    header("Location: ".BASE_PATH."products/");
+                    $productController->create($name, $slug, $description, $features, $brand_id, $cover);
                     break;
     
-                case "editProduct":
+                case "edit":
                 
                     $name = $_POST["name"];
                     $slug = $_POST["slug"];
@@ -113,17 +76,15 @@
                     
                     break;
     
-                case 'deleteProduct':
+                case 'delete':
                     if (isset($_POST['productId'])) {
                         $productId = $_POST['productId'];
-                        $productController->deleteProduct($productId);
-                        $_SESSION['message'] = "Producto eliminado con éxito";
-                        $_SESSION['message_type'] = "success";
+                        $productController->delete($productId);
                     } else {
-                        $_SESSION['message'] = "Hubo un error al eliminar el producto";
+                        $_SESSION['message'] = "Hubo un error al editar el producto (no se el id del producto)";
                         $_SESSION['message_type'] = "error";
+                        header("Location: ".BASE_PATH."products/");
                     }
-                    header("Location: ".BASE_PATH."products/");
 
                     break;
             }
@@ -131,7 +92,7 @@
     }
 
     class ProductController{
-        function getProducts() : array {
+        function get() : array {
 
             $sessionData = $_SESSION['data'];
 
@@ -158,6 +119,45 @@
             $data = $response['data'];
 
             return $data;
+        }
+
+        function create($name = null, $slug = null, $description = null, $features = null, $brand_id = null, $cover = null) : void {
+            $sessionData = $_SESSION['data'];
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://crud.jonathansoto.mx/api/products',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => array('name' => $name,'slug' => $slug,'description' => $description,'features' => $features,'brand_id' => $brand_id,'cover'=> new CURLFILE($cover)),
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer '.$sessionData['token']),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+            
+            $response = json_decode($response, true);
+
+            var_dump($response);
+
+            if(isset($response) && $response['code'] == 4){
+                $_SESSION['message'] = "Producto agregado con éxito";
+                $_SESSION['message_type'] = "success";
+            } else {
+                $_SESSION['message'] = "Hubo un error al agregar el producto";
+                $_SESSION['message_type'] = "error";
+            }
+            
+            header("Location: ".BASE_PATH."products/");
+            exit;
         }
 
         function getProductBySlug() : object {
@@ -190,7 +190,7 @@
             return $data;
         }
 
-        function deleteProduct($productId) : void {
+        function delete($productId = null) : void {
 
             $data = $_SESSION['data'];
 
@@ -212,7 +212,18 @@
             $response = curl_exec($curl);
 
             curl_close($curl);
-            echo $response;
+
+            $response = json_decode($response, false);
+
+            if (isset($response) && $response->code == 4) {
+                $_SESSION['message'] = "Producto editado con éxito";
+                $_SESSION['message_type'] = "success";
+            } else {
+                $_SESSION['message'] = "Hubo un error al editar el producto";
+                $_SESSION['message_type'] = "error";
+            }
+            header("Location: ".BASE_PATH."products/");
+            
         }
 
     }
