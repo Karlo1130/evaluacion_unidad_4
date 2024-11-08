@@ -2,8 +2,11 @@
   include_once "../../app/config.php";
   include '../../app/productController.php';
 
-  $data = $productController->getProducts();
+  $data = $productController->get();
 
+  //*obtener los datos de data con data-> en vez de data['']
+
+  var_dump($data);
 ?>
 <!doctype html>
 <html lang="en">

@@ -39,7 +39,6 @@
 
                     $email = $_POST['email'];
 
-                    echo $email;
                     $authController->forgotPassword($email);
 
                 break;
