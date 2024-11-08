@@ -237,6 +237,50 @@
                 $_SESSION['message'] = $response->message;
             }
         }
+
+        function delete($id = null) : void {
+            $sessionData = $_SESSION['data'];
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://crud.jonathansoto.mx/api/clients/'.$id,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'DELETE',
+                CURLOPT_HTTPHEADER => array(
+                  'Authorization: Bearer '.$sessionData->token,
+                  'Cookie: XSRF-TOKEN=eyJpdiI6Ikdkc05zcjcwRkVqNHVTTmhXdXU3T3c9PSIsInZhbHVlIjoidDVtTmU2NW9BVlRhVUxnQmtYSHJ1V3pHazV4dUJCbUJiTlhSODdXSkg0a2dGNHF6Zk10R0lCMlFWYzZNelE2eG5rckNxd2IyTkZhdDhCSVArdlJ3eU9tTThOZHFKRWxaWWhnZTU1Z3VIaGFVQW5YaHh4NzFLTnIxZjVaZXd1QmciLCJtYWMiOiIxYjMwMWQxNzY5MmRjZTQxYWQ4OTY2NWI1MzQ3ODRiZTEyMTM1NDY1YWU5OGIxYjk0MDRhYWU0ZWY1NjFjMjUwIiwidGFnIjoiIn0%3D; apicrud_session=eyJpdiI6IkM0M2pPaTFGY1pReGFkd1BtemFXeGc9PSIsInZhbHVlIjoiQ3lrY1dtSjluZ2VKbkFQbGl1OGtJMFFDUEhqM2lIenBZUVNkMkhqaVp1bkt0a0dXc1JmYVM4Z2ZvdzVoZ2xuS3JJTFV5NlN0dlpHTktzMWF4N2hOcFlhUzZld05qQUhxNzA2eFpKZlBkUUVUQ3krM21HUENYWGJYUVpJbUtwVU4iLCJtYWMiOiI3NzAzNDJkNzg4ODc0NjI5YzYwYTAzMmNkNjM0ZTQwNDhmZTA5M2VjZDNjMWUxZTkyYzI2NDY3Y2RlMjRkZGFmIiwidGFnIjoiIn0%3D'
+                ),
+            ));
+
+            $response = curl_exec($curl);
+            
+            curl_close($curl);
+            
+            if (!$response) {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = "no se obtuvo una respuesta";
+                
+                //TODO: cambiar la redireccion a al pantalla correspondiente
+                // header("Location: home");
+                exit;
+            }
+            
+            $response = json_decode($response, false);
+
+            if ($response->code == 2) {
+                $_SESSION['message_type'] = "success";
+                $_SESSION['message'] = $response->message;
+            } else {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = $response->message;
+            }
+        }
     }
     
 ?>
