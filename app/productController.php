@@ -6,12 +6,16 @@
 
     $productController = new ProductController();
 
-    if(isset($_POST["action"])){
+    if(isset($_POST["action"])) {
 
         if(isset($_POST['global_token']) 
             && $_POST['global_token'] == $_SESSION['global_token']){
 
             switch($_POST["action"]){
+                case 'get':
+                    var_dump($productController->get());
+                    break;
+
                 case "create":
                     
                     $name = $_POST["name"];
@@ -52,7 +56,7 @@
         }
     }
 
-    class ProductController{
+    class ProductController {
         function get() : array {
 
             $sessionData = $_SESSION['data'];
@@ -69,22 +73,21 @@
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'Authorization: Bearer '.$sessionData['token']),
+                'Authorization: Bearer '.$sessionData->token),
             ));
 
             $response = curl_exec($curl);
 
             curl_close($curl);
             
-            $response = json_decode($response, true);
-            $data = $response['data'];
+            $response = json_decode($response, false);
 
-            return $data;
+            return $response->data;
         }
 
         function getProductBySlug() : object {
 
-            $data = $_SESSION['data'];
+            $sessionData = $_SESSION['data'];
 
             $curl = curl_init();
 
@@ -98,18 +101,16 @@
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'Authorization: Bearer '.$data['token']),
+                'Authorization: Bearer '.$sessionData->token),
             ));
 
             $response = curl_exec($curl);
 
             curl_close($curl);
 
-            $response = json_decode($response);
+            $response = json_decode($response, false);
 
-            $data = $response->data;
-
-            return $data;
+            return $response->data;
         }
 
         function create($name = null, $slug = null, $description = null, $features = null, $brand_id = null, $cover = null) : void {
@@ -128,18 +129,18 @@
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array('name' => $name,'slug' => $slug,'description' => $description,'features' => $features,'brand_id' => $brand_id,'cover'=> new CURLFILE($cover)),
             CURLOPT_HTTPHEADER => array(
-                'Authorization: Bearer '.$sessionData['token']),
+                'Authorization: Bearer '.$sessionData->token),
             ));
 
             $response = curl_exec($curl);
 
             curl_close($curl);
             
-            $response = json_decode($response, true);
+            $response = json_decode($response, false);
 
             var_dump($response);
 
-            if(isset($response) && $response['code'] == 4){
+            if(isset($response) && $response->code == 4){
                 $_SESSION['message'] = "Producto agregado con éxito";
                 $_SESSION['message_type'] = "success";
             } else {
@@ -175,16 +176,16 @@
             )),
             CURLOPT_HTTPHEADER => array(
                 'Content-Type: application/x-www-form-urlencoded',
-                'Authorization: Bearer '.$sessionData['token']),
+                'Authorization: Bearer '.$sessionData->token),
             ));
 
             $response = curl_exec($curl);
 
             curl_close($curl);
             
-            $response = json_decode($response, true);
+            $response = json_decode($response, false);
 
-            if(isset($response) && $response['code'] == 4){
+            if(isset($response) && $response->data == 4){
                 $_SESSION['message'] = "Producto editado con éxito";
                 $_SESSION['message_type'] = "success";
             } else {
@@ -210,7 +211,7 @@
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'DELETE',
             CURLOPT_HTTPHEADER => array(
-                'Authorization: Bearer '.$data['token']),
+                'Authorization: Bearer '.$data->token),
             ));
 
             $response = curl_exec($curl);
