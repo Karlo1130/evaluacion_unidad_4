@@ -105,7 +105,7 @@
         }
 
         //registra un usuario
-        public function registerUser($name, $lastname, $email, $phone_number, $created_by, $role, $password, $profile_photo_file) {
+        public function registerUser($name = null, $lastname = null, $email = null, $phone_number = null, $created_by = null, $role = null, $password = null, $profile_photo_file = null) {
 
             $curl = curl_init();
 
@@ -141,7 +141,7 @@
 
         //! respuesta a peticiones rara
         //? las respuestas tienen sentido?
-        public function forgotPassword($email) {
+        public function forgotPassword($email = null) {
 
             $data = $_SESSION['data'];
 
@@ -189,7 +189,7 @@
 
         }
 
-        public function logout($email) {
+        public function logout($email = null) {
 
             $curl = curl_init();
 
