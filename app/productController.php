@@ -8,12 +8,22 @@
 
     if(isset($_POST["action"])) {
 
-        if(isset($_POST['global_token']) 
-            && $_POST['global_token'] == $_SESSION['global_token']){
+        // if(isset($_POST['global_token']) 
+        //     && $_POST['global_token'] == $_SESSION['global_token']){
 
             switch($_POST["action"]){
                 case 'get':
                     var_dump($productController->get());
+                    break;
+                
+                case 'getBySlug':
+                    var_dump($productController->getProductBySlug());
+                    break;
+
+                case 'getByCategorySlug':
+
+                    var_dump($productController->getByCategorySlug());
+                    
                     break;
 
                 case "create":
@@ -53,11 +63,11 @@
 
                     break;
             }
-        }
+        // }
     }
 
     class ProductController {
-        function get() : array {
+        function get() : object {
 
             $sessionData = $_SESSION['data'];
 
@@ -79,10 +89,33 @@
             $response = curl_exec($curl);
 
             curl_close($curl);
+
+            if (!$response) {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = "no se obtuvo una respuesta";
+
+                //TODO: cambiar la redireccion a al pantalla correspondiente
+                // header("Location: home");
+                exit;
+            }
             
             $response = json_decode($response, false);
 
-            return $response->data;
+            var_dump($response);
+
+            if ($response->code == 4) {
+                $_SESSION['message_type'] = "success";
+                $_SESSION['message'] = $response->message;
+            } else {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = $response->message;
+            }
+
+            if (is_object($response->data)) {
+                return $response->data;
+            } else {
+                return new stdClass();
+            }
         }
 
         function getProductBySlug() : object {
@@ -108,9 +141,81 @@
 
             curl_close($curl);
 
+            if (!$response) {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = "no se obtuvo una respuesta";
+
+                //TODO: cambiar la redireccion a al pantalla correspondiente
+                // header("Location: home");
+                exit;
+            }
+
             $response = json_decode($response, false);
 
-            return $response->data;
+            if ($response->code == 4) {
+                $_SESSION['message_type'] = "success";
+                $_SESSION['message'] = $response->message;
+            } else {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = $response->message;
+            }
+
+            if (is_object($response->data)) {
+                return $response->data;
+            } else {
+                return new stdClass();
+            }
+        }
+
+        function getByCategorySlug() : object {
+            $sessionData = $_SESSION['data'];
+            
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://crud.jonathansoto.mx/api/products/categories/'.$_GET['categorySlug'],
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer '.$sessionData->token,
+                'Cookie: XSRF-TOKEN=eyJpdiI6Ik0wN044TzNoV3ZtdkFQNWRvV2pBVVE9PSIsInZhbHVlIjoiV205TzhvcW5jTHJrdGlnV3ZXU0o4M3V5QXppRnEvSGtacFE5NlF1ZTNjUVh2YUJjT3UrOEpBb1JWYjRHWE9iR28vaHRjdjExRmRsWWVjZVZ5dkNmYWN6NkpnZ0JKcE5mYjFFVXBldmF3aE01Wm1FWGh5S1Vpam9aV2sraXkvN08iLCJtYWMiOiIwNzk1Njc4MjJjMWM5Y2NmY2UxMjZjMmYwY2ExYjdkNTM1YWNkYTJlYmNjZTk5NTlkMDU4Y2Y3ZThkMmMwMDIzIiwidGFnIjoiIn0%3D; apicrud_session=eyJpdiI6IkV2d2NFc2QvTUtBUVMvSVhyYlVnR2c9PSIsInZhbHVlIjoid2Z3M1NvWTFwVHNXNEdDOFRQM0p3b2M5dnFyWWtPbHIvTkJyeEJoRHNaNCtjU2x3eENEeG5pWUdub3owOGhiUGRCNk1YbUZ4RkJWblNmZ1VqeWIxYTVYREJ6M3VtMW1QTUlLK1hrNmV5ZmVtOUNoV25ndXRXY2RBQmtOaEU2NUoiLCJtYWMiOiI1NWNkZTUyMDU0MjQ0YTY0OWU5YzE3NGZhMDdkYWIzODdiYTU5YzM1YmE5ODA1MzA1YjRkNWNkODlkOGJmOWIzIiwidGFnIjoiIn0%3D'
+            ),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+
+            if (!$response) {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = "no se obtuvo una respuesta";
+
+                //TODO: cambiar la redireccion a al pantalla correspondiente
+                // header("Location: home");
+                exit;
+            }
+
+            $response = json_decode($response, false);
+
+            if ($response->code == 4) {
+                $_SESSION['message_type'] = "success";
+                $_SESSION['message'] = $response->message;
+            } else {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = $response->message;
+            }
+
+            if (is_object($response->data)) {
+                return $response->data;
+            } else {
+                return new stdClass();
+            }
+
         }
 
         function create($name = null, $slug = null, $description = null, $features = null, $brand_id = null, $cover = null) : void {
@@ -135,6 +240,15 @@
             $response = curl_exec($curl);
 
             curl_close($curl);
+
+            if (!$response) {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = "no se obtuvo una respuesta";
+
+                //TODO: cambiar la redireccion a al pantalla correspondiente
+                // header("Location: home");
+                exit;
+            }
             
             $response = json_decode($response, false);
 
@@ -183,6 +297,15 @@
 
             curl_close($curl);
             
+            if (!$response) {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = "no se obtuvo una respuesta";
+
+                //TODO: cambiar la redireccion a al pantalla correspondiente
+                // header("Location: home");
+                exit;
+            }
+
             $response = json_decode($response, false);
 
             if(isset($response) && $response->data == 4){
@@ -217,6 +340,15 @@
             $response = curl_exec($curl);
 
             curl_close($curl);
+
+            if (!$response) {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = "no se obtuvo una respuesta";
+
+                //TODO: cambiar la redireccion a al pantalla correspondiente
+                // header("Location: home");
+                exit;
+            }
 
             $response = json_decode($response, false);
 
