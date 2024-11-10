@@ -20,6 +20,20 @@
                     
                 case 'create':
                     
+                    $first_name = $_POST['first_name'];
+                    $last_name = $_POST['last_name'];
+                    $street_and_use_number = $_POST['street_and_use_number'];
+                    $postal_code = $_POST['postal_code'];
+                    $city = $_POST['city'];
+                    $province = $_POST['province'];
+                    $phone_number = $_POST['phone_number'];
+                    $is_billing_address = $_POST['is_billing_address'];
+                    $client_id = $_POST['client_id'];
+
+                    echo 'g';
+                    
+                    $addressController->create($first_name, $last_name, $street_and_use_number, $postal_code, $city, $province, $phone_number, $is_billing_address, $client_id);
+
                     break;
                     
                     case 'update':
@@ -38,8 +52,10 @@
                         
                     break;
                     
-                case 'delete':
-    
+                case 'delete':  
+                    $id = $_POST['id'];
+
+                    $addressController->delete($id);
                     break;
                     
             }
@@ -99,7 +115,56 @@
 
         }
 
+        function create($first_name = null, $last_name = null, $street_and_use_number = null, $postal_code = null, $city = null, $province = null, $phone_number = null, $is_billing_address = null, $client_id = null) : void {
+
+            $sessionData = $_SESSION['data'];
+            
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://crud.jonathansoto.mx/api/addresses',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => array('first_name' => $first_name,'last_name' => $last_name,'street_and_use_number' => $street_and_use_number,'postal_code' => $postal_code,'city' => $city,'province' => $province,'phone_number' => $phone_number,'is_billing_address' => $is_billing_address,'client_id' => $client_id),
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer '.$sessionData->token,
+                'Cookie: XSRF-TOKEN=eyJpdiI6Ik0wN044TzNoV3ZtdkFQNWRvV2pBVVE9PSIsInZhbHVlIjoiV205TzhvcW5jTHJrdGlnV3ZXU0o4M3V5QXppRnEvSGtacFE5NlF1ZTNjUVh2YUJjT3UrOEpBb1JWYjRHWE9iR28vaHRjdjExRmRsWWVjZVZ5dkNmYWN6NkpnZ0JKcE5mYjFFVXBldmF3aE01Wm1FWGh5S1Vpam9aV2sraXkvN08iLCJtYWMiOiIwNzk1Njc4MjJjMWM5Y2NmY2UxMjZjMmYwY2ExYjdkNTM1YWNkYTJlYmNjZTk5NTlkMDU4Y2Y3ZThkMmMwMDIzIiwidGFnIjoiIn0%3D; apicrud_session=eyJpdiI6IkV2d2NFc2QvTUtBUVMvSVhyYlVnR2c9PSIsInZhbHVlIjoid2Z3M1NvWTFwVHNXNEdDOFRQM0p3b2M5dnFyWWtPbHIvTkJyeEJoRHNaNCtjU2x3eENEeG5pWUdub3owOGhiUGRCNk1YbUZ4RkJWblNmZ1VqeWIxYTVYREJ6M3VtMW1QTUlLK1hrNmV5ZmVtOUNoV25ndXRXY2RBQmtOaEU2NUoiLCJtYWMiOiI1NWNkZTUyMDU0MjQ0YTY0OWU5YzE3NGZhMDdkYWIzODdiYTU5YzM1YmE5ODA1MzA1YjRkNWNkODlkOGJmOWIzIiwidGFnIjoiIn0%3D'
+            ),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+
+            if (!$response) {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = "no se obtuvo una respuesta";
+
+                //TODO: cambiar la redireccion a al pantalla correspondiente
+                // header("Location: home");
+                exit;
+            }
+
+            $response = json_decode($response, false);
+
+            var_dump($response);
+
+            if ($response->code == 4) {
+                $_SESSION['message_type'] = "success";
+                $_SESSION['message'] = $response->message;
+            } else {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = $response->message;
+            }
+        }
+
         function update($first_name = null, $last_name = null, $street_and_use_number = null, $postal_code = null, $city = null, $province = null, $phone_number = null, $is_billing_address = null, $client_id = null, $id = null) : void {
+
             $sessionData = $_SESSION['data'];
 
             $curl = curl_init();
@@ -136,7 +201,56 @@
 
             $response = json_decode($response, false);
 
+            var_dump($response);
+
             if ($response->code == 4) {
+                $_SESSION['message_type'] = "success";
+                $_SESSION['message'] = $response->message;
+            } else {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = $response->message;
+            }
+            
+        }
+
+        function delete($id = null) : void {
+            $sessionData = $_SESSION['data'];
+            
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://crud.jonathansoto.mx/api/addresses/'.$id,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'DELETE',
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer '.$sessionData->token,
+                'Cookie: XSRF-TOKEN=eyJpdiI6Ik0wN044TzNoV3ZtdkFQNWRvV2pBVVE9PSIsInZhbHVlIjoiV205TzhvcW5jTHJrdGlnV3ZXU0o4M3V5QXppRnEvSGtacFE5NlF1ZTNjUVh2YUJjT3UrOEpBb1JWYjRHWE9iR28vaHRjdjExRmRsWWVjZVZ5dkNmYWN6NkpnZ0JKcE5mYjFFVXBldmF3aE01Wm1FWGh5S1Vpam9aV2sraXkvN08iLCJtYWMiOiIwNzk1Njc4MjJjMWM5Y2NmY2UxMjZjMmYwY2ExYjdkNTM1YWNkYTJlYmNjZTk5NTlkMDU4Y2Y3ZThkMmMwMDIzIiwidGFnIjoiIn0%3D; apicrud_session=eyJpdiI6IkV2d2NFc2QvTUtBUVMvSVhyYlVnR2c9PSIsInZhbHVlIjoid2Z3M1NvWTFwVHNXNEdDOFRQM0p3b2M5dnFyWWtPbHIvTkJyeEJoRHNaNCtjU2x3eENEeG5pWUdub3owOGhiUGRCNk1YbUZ4RkJWblNmZ1VqeWIxYTVYREJ6M3VtMW1QTUlLK1hrNmV5ZmVtOUNoV25ndXRXY2RBQmtOaEU2NUoiLCJtYWMiOiI1NWNkZTUyMDU0MjQ0YTY0OWU5YzE3NGZhMDdkYWIzODdiYTU5YzM1YmE5ODA1MzA1YjRkNWNkODlkOGJmOWIzIiwidGFnIjoiIn0%3D'
+            ),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+
+            if (!$response) {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = "no se obtuvo una respuesta";
+
+                //TODO: cambiar la redireccion a al pantalla correspondiente
+                // header("Location: home");
+                exit;
+            }
+
+            $response = json_decode($response, false);
+
+            var_dump($response);
+
+            if ($response->code == 2) {
                 $_SESSION['message_type'] = "success";
                 $_SESSION['message'] = $response->message;
             } else {
