@@ -19,22 +19,23 @@
                     break;
                     
                 case 'create':
-                    $first_name = $_POST['first_name'];
-                    $last_name = $_POST['last_name'];
-                    $street_and_use_number = $_POST['street_and_use_number'];
-                    $postal_code = $_POST['postal_code'];
-                    $city = $_POST['city'];
-                    $province = $_POST['province'];
-                    $phone_number = $_POST['phone_number'];
-                    $is_billing_address = $_POST['is_billing_address'];
-                    $client_id = $_POST['client_id'];
-                    $id = $_POST['id'];
                     
-                    $addressController->create($first_name, $last_name, $street_and_use_number, $postal_code, $city, $province, $phone_number, $is_billing_address, $client_id, $id);
                     break;
                     
-                case 'update':
-    
+                    case 'update':
+                        $first_name = $_POST['first_name'];
+                        $last_name = $_POST['last_name'];
+                        $street_and_use_number = $_POST['street_and_use_number'];
+                        $postal_code = $_POST['postal_code'];
+                        $city = $_POST['city'];
+                        $province = $_POST['province'];
+                        $phone_number = $_POST['phone_number'];
+                        $is_billing_address = $_POST['is_billing_address'];
+                        $client_id = $_POST['client_id'];
+                        $id = $_POST['id'];
+                        
+                        $addressController->update($first_name, $last_name, $street_and_use_number, $postal_code, $city, $province, $phone_number, $is_billing_address, $client_id, $id);
+                        
                     break;
                     
                 case 'delete':
@@ -98,7 +99,7 @@
 
         }
 
-        function create($first_name = null, $last_name = null, $street_and_use_number = null, $postal_code = null, $city = null, $province = null, $phone_number = null, $is_billing_address = null, $client_id = null, $id = null) : void {
+        function update($first_name = null, $last_name = null, $street_and_use_number = null, $postal_code = null, $city = null, $province = null, $phone_number = null, $is_billing_address = null, $client_id = null, $id = null) : void {
             $sessionData = $_SESSION['data'];
 
             $curl = curl_init();
