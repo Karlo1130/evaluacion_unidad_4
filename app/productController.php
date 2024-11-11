@@ -38,8 +38,10 @@
                     $features = $_POST["features"];
                     $brand_id = $_POST["brand_id"];
                     $cover = $_FILES["cover"]["tmp_name"];
+                    $categories = $_POST["categories"];
+                    $tags = $_POST["tags"];
     
-                    $productController->create($name, $slug, $description, $features, $brand_id, $cover);
+                    $productController->create($name, $slug, $description, $features, $brand_id, $cover, $categories, $tags);
                     break;
     
                 case "edit":
@@ -265,8 +267,19 @@
 
         }
 
-        function create($name = null, $slug = null, $description = null, $features = null, $brand_id = null, $cover = null) : void {
+        function create($name = null, $slug = null, $description = null, $features = null, $brand_id = null, $cover = null, $categories = null, $tags = null) : void {
             $sessionData = $_SESSION['data'];
+
+            $productData = [
+                'name' => $name,
+                'slug' => $slug,
+                'description' => $description,
+                'features' => $features,
+                'brand_id' => $brand_id,
+                'cover' => new CURLFILE($cover), 
+                'categories' => $categories, 
+                'tags' => $tags
+            ];
 
             $curl = curl_init();
 
@@ -279,7 +292,7 @@
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array('name' => $name,'slug' => $slug,'description' => $description,'features' => $features,'brand_id' => $brand_id,'cover'=> new CURLFILE($cover)),
+            CURLOPT_POSTFIELDS => $productData,
             CURLOPT_HTTPHEADER => array(
                 'Authorization: Bearer '.$sessionData->token),
             ));
@@ -294,10 +307,10 @@
 
                 exit;
             }
+            var_dump($response);
             
             $response = json_decode($response, false);
 
-            var_dump($response);
 
             if(isset($response) && $response->code == 4){
                 $_SESSION['message'] = "Producto agregado con éxito";
