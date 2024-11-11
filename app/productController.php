@@ -10,10 +10,14 @@
 
         // if(isset($_POST['global_token']) 
         //     && $_POST['global_token'] == $_SESSION['global_token']){
-
             switch($_POST["action"]){
                 case 'get':
                     var_dump($productController->get());
+                    break;
+
+                case 'getSpecificProduct':
+
+                    var_dump($productController->getSpecificProduct());
                     break;
                 
                 case 'getBySlug':
@@ -93,15 +97,60 @@
             if (!$response) {
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
-
-                //TODO: cambiar la redireccion a al pantalla correspondiente
-                // header("Location: home");
                 exit;
             }
             
             $response = json_decode($response, false);
 
             var_dump($response);
+
+            if ($response->code == 4) {
+                $_SESSION['message_type'] = "success";
+                $_SESSION['message'] = $response->message;
+            } else {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = $response->message;
+            }
+
+            if (is_object($response->data)) {
+                return $response->data;
+            } else {
+                return new stdClass();
+            }
+        }
+
+        function getSpecificProduct() : object {
+            $sessionData = $_SESSION['data'];
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://crud.jonathansoto.mx/api/products/'.$_GET['id'],
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer '.$sessionData->token
+            ),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+
+            if (!$response) {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = "no se obtuvo una respuesta";
+
+                header("Location: ".BASE_PATH."products/");
+                exit;
+            }
+
+            $response = json_decode($response, false);
 
             if ($response->code == 4) {
                 $_SESSION['message_type'] = "success";
@@ -145,8 +194,7 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                //TODO: cambiar la redireccion a al pantalla correspondiente
-                // header("Location: home");
+                header("Location: ".BASE_PATH."products/");
                 exit;
             }
 
@@ -195,8 +243,7 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                //TODO: cambiar la redireccion a al pantalla correspondiente
-                // header("Location: home");
+                header("Location: ".BASE_PATH."products/");
                 exit;
             }
 
@@ -245,8 +292,6 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                //TODO: cambiar la redireccion a al pantalla correspondiente
-                // header("Location: home");
                 exit;
             }
             
@@ -301,8 +346,6 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                //TODO: cambiar la redireccion a al pantalla correspondiente
-                // header("Location: home");
                 exit;
             }
 
@@ -345,8 +388,6 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                //TODO: cambiar la redireccion a al pantalla correspondiente
-                // header("Location: home");
                 exit;
             }
 
