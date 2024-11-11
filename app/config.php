@@ -4,7 +4,7 @@
 	}
 	
 	if (!defined('BASE_PATH')) {
-      define('BASE_PATH','http://localhost/examen_4/');
+      define('BASE_PATH','http://localhost/evaluacion_unidad_4/');
    	}
 
 ?>
