@@ -14,8 +14,7 @@
             switch ($_POST['action']) {
 
                 case 'getByClient':
-                    $id = $_POST['id'];
-                    var_dump($addressController->getByClient($id));
+                    var_dump($addressController->getByClient());
                     break;
                     
                 case 'create':
@@ -30,25 +29,23 @@
                     $is_billing_address = $_POST['is_billing_address'];
                     $client_id = $_POST['client_id'];
 
-                    echo 'g';
-                    
                     $addressController->create($first_name, $last_name, $street_and_use_number, $postal_code, $city, $province, $phone_number, $is_billing_address, $client_id);
 
                     break;
                     
-                    case 'update':
-                        $first_name = $_POST['first_name'];
-                        $last_name = $_POST['last_name'];
-                        $street_and_use_number = $_POST['street_and_use_number'];
-                        $postal_code = $_POST['postal_code'];
-                        $city = $_POST['city'];
-                        $province = $_POST['province'];
-                        $phone_number = $_POST['phone_number'];
-                        $is_billing_address = $_POST['is_billing_address'];
-                        $client_id = $_POST['client_id'];
-                        $id = $_POST['id'];
-                        
-                        $addressController->update($first_name, $last_name, $street_and_use_number, $postal_code, $city, $province, $phone_number, $is_billing_address, $client_id, $id);
+                case 'update':
+                    $first_name = $_POST['first_name'];
+                    $last_name = $_POST['last_name'];
+                    $street_and_use_number = $_POST['street_and_use_number'];
+                    $postal_code = $_POST['postal_code'];
+                    $city = $_POST['city'];
+                    $province = $_POST['province'];
+                    $phone_number = $_POST['phone_number'];
+                    $is_billing_address = $_POST['is_billing_address'];
+                    $client_id = $_POST['client_id'];
+                    $id = $_POST['id'];
+                    
+                    $addressController->update($first_name, $last_name, $street_and_use_number, $postal_code, $city, $province, $phone_number, $is_billing_address, $client_id, $id);
                         
                     break;
                     
@@ -64,13 +61,13 @@
 
     class AddressController{
 
-        function getByClient($id = false) : Object {
+        function getByClient() : Object {
             $sessionData = $_SESSION['data'];
 
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://crud.jonathansoto.mx/api/addresses/'.$id,
+            CURLOPT_URL => 'https://crud.jonathansoto.mx/api/addresses/'.$_GET['id'],
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
