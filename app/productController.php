@@ -52,8 +52,10 @@
                     $features = $_POST["features"];
                     $id = $_POST["id"];
                     $brand_id = $_POST["brand_id"];
+                    $categories = $_POST["categories"];
+                    $tags = $_POST["tags"];
     
-                    $productController->edit($name, $slug, $description, $features, $id, $brand_id);
+                    $productController->edit($name, $slug, $description, $features, $id, $brand_id, $categories, $tags);
                     
                     break;
     
@@ -324,8 +326,19 @@
             exit;
         }
 
-        function edit($name = null, $slug = null, $description = null, $features = null, $id = null, $brand_id = null) : void {
+        function edit($name = null, $slug = null, $description = null, $features = null, $id = null, $brand_id = null, $categories = null, $tags = null) : void {
             $sessionData = $_SESSION['data'];
+
+            $productData = [
+                'name' => $name,
+                'slug' => $slug,
+                'description' => $description,
+                'features' => $features,
+                'brand_id' => $brand_id,
+                'id' => $id, 
+                'categories' => $categories, 
+                'tags' => $tags
+            ];
     
             $curl = curl_init();
 
@@ -338,14 +351,7 @@
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'PUT',
-            CURLOPT_POSTFIELDS => http_build_query(array(
-                'name' => $name,
-                'slug' => $slug,
-                'description' => $description,
-                'features' => $features,
-                'id' => $id,
-                'brand_id' => $brand_id,
-            )),
+            CURLOPT_POSTFIELDS => $productData,
             CURLOPT_HTTPHEADER => array(
                 'Content-Type: application/x-www-form-urlencoded',
                 'Authorization: Bearer '.$sessionData->token),
