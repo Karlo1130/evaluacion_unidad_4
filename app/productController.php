@@ -75,7 +75,7 @@
     }
 
     class ProductController {
-        function get() : object {
+        function get() : array {
 
             $sessionData = $_SESSION['data'];
 
@@ -114,10 +114,10 @@
                 $_SESSION['message'] = $response->message;
             }
 
-            if (is_object($response->data)) {
+            if (is_array($response->data)) {
                 return $response->data;
             } else {
-                return new stdClass();
+                return [];
             }
         }
 
