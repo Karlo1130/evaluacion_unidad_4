@@ -20,3 +20,6 @@ RewriteRule ^users/?$ views/users/users.php
 RewriteRule ^users/list_users/([^/]+)?$ views/users/list_users.php
 RewriteRule ^users/edit_users/([^/]+)?$ views/users/edit_users.php
 RewriteRule ^users/details_users/([^/]+)?$ views/users/details_users.php
+
+RewriteRule ^clients/?$ views/clients/clientes.php
+

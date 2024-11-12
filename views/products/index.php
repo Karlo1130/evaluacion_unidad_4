@@ -6,7 +6,6 @@
 
   //*obtener los datos de data con data-> en vez de data['']
 
-  var_dump($data);
 ?>
 <!doctype html>
 <html lang="en">
@@ -119,7 +118,7 @@
                       <div class="card product-card">
                         <div class="card-img-top">
                           <a href="ecom_product-details.html">
-                            <img src="<?php echo $tarjeta['cover']; ?>" alt="image" class="img-prod img-fluid" />
+                            <img src="<?php echo $tarjeta->cover ?>" alt="image" class="img-prod img-fluid" />
                           </a>
                           <div class="card-body position-absolute end-0 top-0">
                             <div class="form-check prod-likes">
@@ -130,28 +129,28 @@
                         </div>
                         <div class="card-body">
                           <a href="ecom_product-details.html">
-                            <p class="prod-content mb-0 text-muted"><?php echo $tarjeta['name']; ?></p>
+                            <p class="prod-content mb-0 text-muted"><?php echo $tarjeta->name ?></p>
                           </a>
                           <div class="d-flex align-items-center justify-content-between mt-2 mb-3 flex-wrap gap-1">
                             <h4 class="mb-0 text-truncate"
-                              ><b><?php echo $tarjeta['description']; ?></b>
+                              ><b><?php echo $tarjeta->description ?></b>
                             </h4  >
                             <div class="d-inline-flex align-items-center">
                               <i class="ph-duotone ph-star text-warning me-1"></i>
-                              <?php echo $tarjeta['slug']; ?>
+                              <?php echo $tarjeta->slug ?>
                             </div>
                           </div>
                           <div class="d-flex">
                             <div class="flex-shrink-0">
                               
-                              <button class="btn btn-danger" onclick="alert(<?php echo $tarjeta['id'] ?>)">Delete</button>
+                              <button class="btn btn-danger" onclick="alert(<?php echo $tarjeta->id ?>)">Delete</button>
                              
-                              <a href="edit/<?php echo $tarjeta['slug']; ?>" class="btn btn-primary w-auto">editar</a>
+                              <a href="edit/<?php echo $tarjeta->slug ?>" class="btn btn-primary w-auto">editar</a>
                             </div>
                             <div class="flex-grow-1 ms-3">
                               <div class="d-grid">
                               
-                                <a href="<?php echo $tarjeta['slug']; ?>" class="btn btn-link-secondary btn-prod-card">ir al producto</a>
+                                <a href="<?php echo $tarjeta->slug ?>" class="btn btn-link-secondary btn-prod-card">ir al producto</a>
                               </div>
 
                               <form method="POST" action="controller" id="deleteForm">
