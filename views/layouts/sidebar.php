@@ -21,121 +21,62 @@
               <label>Navigation</label>
               <i class="ph-duotone ph-gauge"></i>
             </li>
-            <li class="pc-item pc-hasmenu">
+            <li class="pc-item ">
               <a href="#!" class="pc-link">
                 <span class="pc-micon">
                   <i class="ph-duotone ph-gauge"></i>
                 </span>
                 <span class="pc-mtext">Dashboard</span>
-                <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                 <span class="pc-badge">2</span>
               </a>
-              <ul class="pc-submenu">
-                <li class="pc-item"><a class="pc-link" href="index.html">Analytics</a></li>
-                <li class="pc-item"><a class="pc-link" href="affiliate.html">Affiliate</a></li>
-                <li class="pc-item"><a class="pc-link" href="finance.html">Finance</a></li>
-                <li class="pc-item"><a class="pc-link" href="../admins/helpdesk-dashboard.html">Helpdesk</a></li>
-                <li class="pc-item"><a class="pc-link" href="invoice.html">Invoice</a></li>
-              </ul>
+              
             </li>
+
             
-           
-            
-            
-            
-            
-            
-            
-            
+            <!-- products -->
             <li class="pc-item pc-hasmenu">
               <a href="#!" class="pc-link">
                 <span class="pc-micon">
                   <i class="ph-duotone ph-shopping-cart"></i>
                 </span>
-                <span class="pc-mtext">E-commerce</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span
+                <span class="pc-mtext">Productos</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span
               ></a>
               <ul class="pc-submenu">
-                <li class="pc-item"><a class="pc-link" href="<?= BASE_PATH ?>products/">Product</a></li>
-                <li class="pc-item"><a class="pc-link" href="../application/ecom_product-details.html">Product details</a></li>
-                <li class="pc-item"><a class="pc-link" href="../application/ecom_product-list.html">Product List</a></li>
-                <li class="pc-item"><a class="pc-link" href="../application/ecom_product-add.html">Add New Product</a></li>
-                <li class="pc-item"><a class="pc-link" href="../application/ecom_checkout.html">Checkout</a></li>
+                <li class="pc-item"><a class="pc-link" href="<?= BASE_PATH ?>products/">Lista de productos</a></li>
+                <li class="pc-item"><a class="pc-link" href="../application/ecom_product-details.html">Añadir Producto</a></li>
+                
               </ul>
             </li>
-           
+          
+
+            <!-- clients -->
+
             <li class="pc-item pc-hasmenu">
               <a href="#!" class="pc-link">
                 <span class="pc-micon">
                   <i class="ph-duotone ph-newspaper"></i>
                 </span>
-                <span class="pc-mtext">Invoice 1</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span
+                <span class="pc-mtext">Clientes</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span
               ></a>
               <ul class="pc-submenu">
-                <li class="pc-item"><a class="pc-link" href="../application/invoice-list.html">Invoice List</a></li>
-                <li class="pc-item"><a class="pc-link" href="../application/invoice-create.html">Create</a></li>
-                <li class="pc-item"><a class="pc-link" href="../application/invoice-view.html">Preview</a></li>
-                <li class="pc-item"><a class="pc-link" href="../admins/invoice-dashboard.html">Dashboard</a></li>
-                <li class="pc-item"><a class="pc-link" href="../admins/invoice-create.html">Create</a></li>
-                <li class="pc-item"><a class="pc-link" href="../admins/invoice-view.html">Details</a></li>
-                <li class="pc-item"><a class="pc-link" href="../admins/invoice-list.html">List</a></li>
-                <li class="pc-item"><a class="pc-link" href="../admins/invoice-edit.html">Edit</a></li>
-              </ul>
+                 <li class="pc-item"><a class="pc-link" href="../admins/course-dashboard.html">Clientes</a></li>
+                 <li class="pc-item"><a class="pc-link" href="../admins/course-dashboard.html">Añadir Cliente</a></li>
+              </ul> 
+          
+              
+          
             </li>
-            
-            
-           
-            <li class="pc-item pc-hasmenu">
+
+            <!-- orders -->
+            <li class="pc-item ">
               <a href="#!" class="pc-link">
                 <span class="pc-micon">
-                  <i class="ph-duotone ph-books"></i>
+                  <i class="ph-duotone ph-newspaper"></i>
                 </span>
-                <span class="pc-mtext">Online Courses</span>
-                <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
-              </a>
-              <ul class="pc-submenu">
-                <li class="pc-item"><a class="pc-link" href="../admins/course-dashboard.html">Dashboard</a></li>
-                <li class="pc-item pc-hasmenu">
-                  <a class="pc-link" href="#!"
-                    >Teacher<span class="pc-arrow"><i data-feather="chevron-right"></i></span
-                  ></a>
-                  <ul class="pc-submenu">
-                    <li class="pc-item"><a class="pc-link" href="../admins/course-teacher-list.html">List</a></li>
-                    <li class="pc-item"><a class="pc-link" href="../admins/course-teacher-apply.html">Apply</a></li>
-                    <li class="pc-item"><a class="pc-link" href="../admins/course-teacher-add.html">Add</a></li>
-                  </ul>
-                </li>
-                <li class="pc-item pc-hasmenu">
-                  <a class="pc-link" href="#!"
-                    >Student<span class="pc-arrow"><i data-feather="chevron-right"></i></span
-                  ></a>
-                  <ul class="pc-submenu">
-                    <li class="pc-item"><a class="pc-link" href="../admins/course-student-list.html">list</a></li>
-                    <li class="pc-item"><a class="pc-link" href="../admins/course-student-apply.html">Apply</a></li>
-                    <li class="pc-item"><a class="pc-link" href="../admins/course-student-add.html">Add</a></li>
-                  </ul>
-                </li>
-                <li class="pc-item pc-hasmenu">
-                  <a class="pc-link" href="#!"
-                    >Courses<span class="pc-arrow"><i data-feather="chevron-right"></i></span
-                  ></a>
-                  <ul class="pc-submenu">
-                    <li class="pc-item"><a class="pc-link" href="../admins/course-course-view.html">View</a></li>
-                    <li class="pc-item"><a class="pc-link" href="../admins/course-course-add.html">Add</a></li>
-                  </ul>
-                </li>
-                <li class="pc-item"><a class="pc-link" href="../admins/course-pricing.html">Pricing</a></li>
-                <li class="pc-item"><a class="pc-link" href="../admins/course-site.html">Site</a></li>
-                <li class="pc-item pc-hasmenu">
-                  <a class="pc-link" href="#!"
-                    >Setting<span class="pc-arrow"><i data-feather="chevron-right"></i></span
-                  ></a>
-                  <ul class="pc-submenu">
-                    <li class="pc-item"><a class="pc-link" href="../admins/course-setting-payment.html">Payment</a></li>
-                    <li class="pc-item"><a class="pc-link" href="../admins/course-setting-pricing.html">Pricing</a></li>
-                    <li class="pc-item"><a class="pc-link" href="../admins/course-setting-notifications.html">Notifications</a></li>
-                  </ul>
-                </li>
-              </ul>
+                <span class="pc-mtext">Ordenes</span><span class="pc-arrow"></span
+              ></a>
+              </ul> 
+          
             </li>
            
             
