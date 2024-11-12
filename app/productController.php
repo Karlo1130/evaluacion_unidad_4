@@ -106,8 +106,6 @@
             
             $response = json_decode($response, false);
 
-            var_dump($response);
-
             if ($response->code == 4) {
                 $_SESSION['message_type'] = "success";
                 $_SESSION['message'] = $response->message;
