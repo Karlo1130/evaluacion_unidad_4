@@ -270,16 +270,32 @@
         function create($name = null, $slug = null, $description = null, $features = null, $brand_id = null, $cover = null, $categories = null, $tags = null) : void {
             $sessionData = $_SESSION['data'];
 
-            $productData = [
+            $index = 0;
+            $categoriesArray = [];
+            foreach($categories as $category){
+                
+                $categoriesArray['categories['. $index .']'] = $category;
+        
+                $index++;
+            }
+
+            $index = 0;
+            $tagsArray = [];
+            foreach($tags as $tag){
+                
+                $tagsArray['tags['. $index .']'] = $tag;
+        
+                $index++;
+            }
+
+            $productData = array_merge([
                 'name' => $name,
                 'slug' => $slug,
                 'description' => $description,
                 'features' => $features,
                 'brand_id' => $brand_id,
-                'cover' => new CURLFILE($cover), 
-                'categories' => $categories, 
-                'tags' => $tags
-            ];
+                'cover' => new CURLFILE($cover)
+            ], $categoriesArray, $tagsArray);
 
             $curl = curl_init();
 
@@ -327,16 +343,32 @@
         function edit($name = null, $slug = null, $description = null, $features = null, $id = null, $brand_id = null, $categories = null, $tags = null) : void {
             $sessionData = $_SESSION['data'];
 
-            $productData = [
+            $index = 0;
+            $categoriesArray = [];
+            foreach($categories as $category){
+                
+                $categoriesArray['categories['. $index .']'] = $category;
+        
+                $index++;
+            }
+
+            $index = 0;
+            $tagsArray = [];
+            foreach($tags as $tag){
+                
+                $tagsArray['tags['. $index .']'] = $tag;
+        
+                $index++;
+            }
+
+            $productData = array_merge([
                 'name' => $name,
                 'slug' => $slug,
                 'description' => $description,
                 'features' => $features,
                 'brand_id' => $brand_id,
-                'id' => $id, 
-                'categories' => $categories, 
-                'tags' => $tags
-            ];
+                'id' => $id
+            ], $categoriesArray, $tagsArray);
     
             $curl = curl_init();
 
