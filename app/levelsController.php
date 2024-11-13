@@ -32,8 +32,9 @@
                     break;
     
                 case "delete":
-                
+                    $id = $_POST['id'];
                     
+                    $levelsController->delete($id);
                     
                     break;
             }
@@ -222,8 +223,48 @@
             }
         }
 
-        function delete() : void {
-            
+        function delete($id = null) : void {
+            $sessionData = $_SESSION['data'];
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://crud.jonathansoto.mx/api/levels/'.$id,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'DELETE',
+                CURLOPT_HTTPHEADER => array(
+                  'Authorization: Bearer '.$sessionData->token,
+                  'Cookie: XSRF-TOKEN=eyJpdiI6Inc3eU9pSTcyT1g3di9ML2VBTG40NUE9PSIsInZhbHVlIjoiWG0rQ0R4MGpWb2J6VWpka0xRMDJadWxscVc3VmtsNHF0OUsvdjBhQUhGMmxQSjQ1cHRwQVNRQUxzeXRXc0FWdkExMVB1N0tIT09MSnZNc2dGTlp2NUpwbTFTUnY5anRGZEtMSFNic2VoWml1VC9oUk5QZWljM2drQjJMMjNMZHQiLCJtYWMiOiIxMWRhNGZiMTVjZDYwMDEyZGJmZmQxZWVjNmUwNDlkYTNlM2QyOTRiYjU3MGUyYzE2YTk4NWI5ZjUyYzMyNzI3IiwidGFnIjoiIn0%3D; apicrud_session=eyJpdiI6InJpWnpCVnBpbTJDYnc4M05ua0R6bUE9PSIsInZhbHVlIjoiWjdxbU1QSEE3K2ovR3pwSGlLenZlS3BlbkJUSlNNcHgvc1BqR25iRFFvemM4MHFyUUZ0aVNaS0JZM3R2VjdLQjhRQ1FLWkFpVWtQNXdHWTZ6T2VQYSttSDVBZTNvMFcrUExqSVNBOTFkVEhqVDZhZi9GdGFkS0NQWVVJYWRjbEEiLCJtYWMiOiIyMTE1MWU0OGI3Zjg0ZDJjMWFhZTA4MTQ3OGFhMWExYmI5NDUzZGM4YThjOGVmNTRiYzM0ZDdmZWE2ZjdiYTQyIiwidGFnIjoiIn0%3D'
+                ),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+
+            if (!$response) {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = "no se obtuvo una respuesta";
+
+                exit;
+            }
+
+            $response = json_decode($response, false);
+
+            var_dump($response);
+
+            if ($response->code == 2) {
+                $_SESSION['message_type'] = "success";
+                $_SESSION['message'] = $response->message;
+            } else {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = $response->message;
+            }
         }
     }
 ?>
