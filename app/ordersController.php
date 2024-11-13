@@ -14,9 +14,9 @@
                 case 'getOrdersBetweenDates':
                     var_dump($ordersController->getOrdersBetweenDates());
                     break;
-                // case 'getSpecificOrder':
-                //     var_dump($ordersController->getSpecificOrder());
-                //     break;
+                case 'getSpecificOrder':
+                    var_dump($ordersController->getSpecificOrder());
+                    break;
                         
 
                 case "create":
@@ -130,9 +130,52 @@
             }
         }
 
-        // function getSpecificOrder() : object {
+        function getSpecificOrder() : object {
+            $sessionData = $_SESSION['data'];
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://crud.jonathansoto.mx/api/orders/details/'.$_GET['id'],
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+                CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer '.$sessionData->token,
+                'Cookie: XSRF-TOKEN=eyJpdiI6ImtUY3huckZZUjRNTDljN1FONDlQbEE9PSIsInZhbHVlIjoiMHVNSWZnQk81bEdWbXFnb0tESU9sYkh5WmZLMU9nNWxEM2VFL29YcktLU2VCMTlWdjNHUG40dXN4YWVqQ1dBRzZySUw2MUkwa21pbFFrQVRRK3ZzcWJLT292UEJXdG5QY0krOEU1UmliMXJqa2hVTUdQWW5GQlRSa2E5VEc2dC8iLCJtYWMiOiI5NWE1NTg2YjM3Mjg3NTNkNGI1NDk3NWQ1MDdjNTMxMTdlYjRmZDZhZDM0NzczNmNmOWEwNjk2OGMyZjBkMzUyIiwidGFnIjoiIn0%3D; apicrud_session=eyJpdiI6Im0wUFAxT3c3b1EvSVRXd3ZhNC92eHc9PSIsInZhbHVlIjoiMkRPSTR3S0ZCMTNjWFY1eCthblFOWVJ6VVdBZXV4azZFVjBQd2lhZzdGNkF4VkxtKzFTZ0xHSVZkemE3M0dmK1hkWEZLMVFNekNOVmkyQnpwV1pWRTNGY0tvRVFnWVd4UUFSS2JFYXV3L2pDU01BSnVlbkxCRE9RMlo5M0ovT2wiLCJtYWMiOiJjZmJhZjFmNGQ5Nzk1MzcwMmYwMDQ1M2M5YTJmYzQ3MWVkODAyZjkyY2Y0ZDJhNTY2OThhODAzOTZmZjUyOWFjIiwidGFnIjoiIn0%3D'
+                ),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+
+            if (!$response) {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = "no se obtuvo una respuesta";
+                exit;
+            }
             
-        // }
+            $response = json_decode($response, false);
+
+            if ($response->code == 4) {
+                $_SESSION['message_type'] = "success";
+                $_SESSION['message'] = $response->message;
+            } else {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = $response->message;
+            }
+
+            if (is_object($response->data)) {
+                return $response->data;
+            } else {
+                return new stdClass();
+            }
+        }
 
         function create() : void {
             
