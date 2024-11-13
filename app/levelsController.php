@@ -23,6 +23,11 @@
                     break;
 
                 case 'update':
+                    $id = $_POST['id'];
+                    $name = $_POST['name'];
+                    $percentage_discount = $_POST['percentage_discount'];
+
+                    $levelsController->update($id, $name, $percentage_discount);
                     
                     break;
     
@@ -172,8 +177,49 @@
             }
         }
 
-        function update() : void {
+        function update($id = null, $name = null, $percentage_discount = null) : void {
+            $sessionData = $_SESSION['data'];
 
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://crud.jonathansoto.mx/api/levels',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'PUT',
+                CURLOPT_POSTFIELDS => 'id='.$id.'&name='.$name.'&percentage_discount='.$percentage_discount,
+                CURLOPT_HTTPHEADER => array(
+                  'Content-Type: application/x-www-form-urlencoded',
+                  'Authorization: Bearer '.$sessionData->token,
+                  'Cookie: XSRF-TOKEN=eyJpdiI6InQ0WUsxcUZKYno0K3ZoQ0RjZTVWckE9PSIsInZhbHVlIjoiM1dZNjhPKzdrNm9hZWlOSUlBWXM3MzRZM2JuQWJ0U25FNUxZb0JZTldBcWlDY3BSTDlvb1N5THk1SFE2Sldub3dlVGxNS3VqMUVUelJ1U21ScE1JdFgzM3VjYXkrbTd1aGcxRHlGSjNXeGhuc1Frb293cm0ycncyTHhyckhZb2wiLCJtYWMiOiJjM2VjNTcyZTFkY2EwMjZhY2MzNDI2OWNmOTlkZDczN2I1ZDVjMmNjNjM2YjcwY2JmZDJiMTUyNjlkZTM0ODQwIiwidGFnIjoiIn0%3D; apicrud_session=eyJpdiI6Ijk1QjNuMVdOWkNGajN2TjNxUUsxSmc9PSIsInZhbHVlIjoiY1oycTBxQnEvVC9xSjRXTVF6bm1KZzhpaWxycktXR3pObnlUZWVnMHdTaXp2S1dTYTBHMHhTaXR6VDZ1TzhjamIvd3lVUHRyNjhubFowS1pDSnRMcXJlQ2lmL1dqSDMyM2xKajJNYVQ0dEJ5aUlTWnlpUnNkR1VxRk5mdDQ5bkIiLCJtYWMiOiJkMmM3YzRiZGY4YWY1NDY1YzIyNmRhYjI1YWRjM2YwNWI0MmRmMzFjNzBhZTMzMzc4MmI2M2NjZDkyYjg1YmU2IiwidGFnIjoiIn0%3D'
+                ),
+              ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+
+            if (!$response) {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = "no se obtuvo una respuesta";
+                exit;
+            }
+            
+            $response = json_decode($response, false);
+
+            var_dump($response);
+
+            if ($response->code == 4) {
+                $_SESSION['message_type'] = "success";
+                $_SESSION['message'] = $response->message;
+            } else {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = $response->message;
+            }
         }
 
         function delete() : void {
