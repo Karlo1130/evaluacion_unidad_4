@@ -11,9 +11,9 @@
                 case 'get':
                     var_dump($ordersController->get());
                     break;
-                // case 'getOrdersBetweenDates':
-                //     var_dump($ordersController->getOrdersBetweenDates());
-                //     break;
+                case 'getOrdersBetweenDates':
+                    var_dump($ordersController->getOrdersBetweenDates());
+                    break;
                 // case 'getSpecificOrder':
                 //     var_dump($ordersController->getSpecificOrder());
                 //     break;
@@ -83,9 +83,52 @@
             }
         }
 
-        // function getOrdersBetweenDates() : array {
+        function getOrdersBetweenDates($firstDate = null, $lastDate = null) : array {
+            $sessionData = $_SESSION['data'];
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://crud.jonathansoto.mx/api/orders/'.$firstDate.'/'.$lastDate,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer '.$sessionData->token,
+                'Cookie: XSRF-TOKEN=eyJpdiI6IkFiY2lJRGFuSmdUdDNsK3pVQmduWHc9PSIsInZhbHVlIjoiOHdkRXpLQm5yMVNlV2hvRkxOdXg0b3Y3UHVtSVcwbDl2SzUwcUg2QXFacXA4TU5tTmVERTZCMUFnM01odHFqT25lYlpONWxIT2FkUSt6b1hNcEFCWEtNMERUNi9kMDFnNjl1dmJRKzNQMU1LcVJzSVJ2THFZV2FvcDFicG83Z2YiLCJtYWMiOiJjZjkyNjc0ZjhjNmIyNzM5ZjkwMWZjOWFmOWZhMjBhNjg3YTI3ZjNiZGUwODg1MzdjMWQzYWRiMzVhNmQ2MWYwIiwidGFnIjoiIn0%3D; apicrud_session=eyJpdiI6IlI3L2pXMlU2dElLREhpZDNDa0o0Ymc9PSIsInZhbHVlIjoiWWtGQytid2tURE9CcnFQZkhoQms5VDhlaEV3ejZBWkt5TzhLYTFCZ3RYLzg2clVndGgwRWc4TUN4cnZUa05lY1NORTQwMmlob0IreklteFdBNGY1aHVESWJWTklkRTE5Sm11cWg1SE1Lb2taRnk2YlNyaXRDemZMcmtiQys4SDciLCJtYWMiOiJkOGRkYWVmMTlhNWQwMDZkNTUyNDYxZDRhNTA1N2NmOWVjYmI4NjJhMmQ3NzFmOTZiMDE1M2Q3YzY3OTU3NzQ2IiwidGFnIjoiIn0%3D'
+            ),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+
+            if (!$response) {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = "no se obtuvo una respuesta";
+                exit;
+            }
             
-        // }
+            $response = json_decode($response, false);
+
+            if ($response->code == 4) {
+                $_SESSION['message_type'] = "success";
+                $_SESSION['message'] = $response->message;
+            } else {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = $response->message;
+            }
+
+            if (is_array($response->data)) {
+                return $response->data;
+            } else {
+                return [null];
+            }
+        }
 
         // function getSpecificOrder() : object {
             
