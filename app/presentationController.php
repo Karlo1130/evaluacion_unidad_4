@@ -353,7 +353,7 @@
 
             var_dump($response);
 
-            if ($response->code == 4) {
+            if ($response->code == 2) {
                 $_SESSION['message_type'] = "success";
                 $_SESSION['message'] = $response->message;
             } else {
