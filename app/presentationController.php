@@ -21,6 +21,19 @@
                 
                 case 'update':
 
+                    $description = $_POST['description'];
+                    $code = $_POST['code'];
+                    $weight_in_grams = $_POST['weight_in_grams'];
+                    $status = $_POST['status'];
+                    $stock = $_POST['stock'];
+                    $stock_min = $_POST['stock_min'];
+                    $stock_max = $_POST['stock_max'];
+                    $product_id = $_POST['product_id'];
+                    $id = $_POST['id'];
+                    $amount = $_POST['amount'];
+
+                    $presentationController->update($description, $code, $weight_in_grams, $status, $stock, $stock_min, $stock_max, $product_id, $id, $amount);
+
                     break;
 
                 case 'updatePrice':
@@ -155,8 +168,53 @@
             }
         }
 
-        function update() : void {
+        function update($description = null, $code = null, $weight_in_grams = null, $status = null, $stock = null, $stock_min = null, $stock_max = null, $product_id = null, $id = null, $amount = null) : void {
             
+
+            $sessionData = $_SESSION['data'];
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://crud.jonathansoto.mx/api/presentations',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'PUT',
+            CURLOPT_POSTFIELDS => 'description='.$description.'&code='.$code.'&weight_in_grams='.$weight_in_grams.'&status='.$status.'&stock='.$stock.'&stock_min='.$stock_min.'&stock_max='.$stock_max.'&product_id='.$product_id.'&id='.$id.'&amount='.$amount,
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/x-www-form-urlencoded',
+                'Authorization: Bearer '.$sessionData->token,
+                'Cookie: XSRF-TOKEN=eyJpdiI6IjZWdFRHTVV3dnFONmJablduaW10TUE9PSIsInZhbHVlIjoiaXF6NndjaTAzcjRlVDdRR3lIVzZCb0IzQzFTQmRmNnZ1ODRnM3d2OTZZeVphbGh4djFoMEg5YkJGeGx0QVh3eGFGU0J6a0UzSElyR241bmJadlVMU29WMmc4NlFZcnFadU1OSEw2TVJXNjNmam5tKyttaTNWcitENXczM2JMR2QiLCJtYWMiOiIyMTBkMzlkZGNiMzYwZGM2YzAyMWY5MGFlYzA0YTRlYzAxYjBlYWJmMmMyOGIwNmRhODZmMWNjNDQ4OTc1MWViIiwidGFnIjoiIn0%3D; apicrud_session=eyJpdiI6Im1UQlgzN0Q0ZFRraXJUNUlHUmdxRVE9PSIsInZhbHVlIjoiRkNHb1k5eURUOURrWW80a2x1aU12d09HaEkrQ3pNa2JWRUxBY2diTlFQTG03S1Z6My91REJtUGdqSy8yTTduNlVncjE0ekViQ2RIcjNPLzZta1lodEhwdUpaZEhISU9qeDFaZW5jZVhEeGlUNWUyQXc5SzNyc2R0N050cWlqR2UiLCJtYWMiOiJlZTRmZjU5NTI3Njg0YTlkNzI3ZGNkOTMzYmNhMWQyNTliNjJkZmMwMGRiZTNmYWYxYTJlODVmYmRjMGNkNjczIiwidGFnIjoiIn0%3D'
+            ),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+
+            if (!$response) {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = "no se obtuvo una respuesta";
+
+                header("Location: ".BASE_PATH."products/");
+                exit;
+            }
+
+            $response = json_decode($response, false);
+
+            var_dump($response);
+
+            if ($response->code == 4) {
+                $_SESSION['message_type'] = "success";
+                $_SESSION['message'] = $response->message;
+            } else {
+                $_SESSION['message_type'] = "error";
+                $_SESSION['message'] = $response->message;
+            }
         }
 
         function updatePrice() : void {
