@@ -8,8 +8,8 @@
 
     if(isset($_POST['clients'])){
 
-        // if(isset($_POST['global_token']) 
-        //     && $_POST['global_token'] == $_SESSION['global_token']){
+        if(isset($_POST['global_token']) 
+            && $_POST['global_token'] == $_SESSION['global_token']){
             
             switch ($_POST['clients']) {
                 case 'get':
@@ -51,7 +51,7 @@
                     # code...
                     break;
             }
-        // }
+        }
     }
 
     class ClientsController {
