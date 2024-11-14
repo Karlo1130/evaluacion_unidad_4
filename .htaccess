@@ -22,4 +22,6 @@ RewriteRule ^users/edit_users/([^/]+)?$ views/users/edit_users.php
 RewriteRule ^users/details_users/([^/]+)?$ views/users/details_users.php
 
 RewriteRule ^clients/?$ views/clients/clientes.php
+RewriteRule ^new_client/?$ views/clients/createClients.php
+
 
