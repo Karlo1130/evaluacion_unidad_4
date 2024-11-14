@@ -22,35 +22,47 @@
             
             case 'register':
 
-                $name = $_POST['name'];
-                $lastname = $_POST['lastname'];
-                $email = $_POST['email'];
-                $phone_number = $_POST['phone_number'];
-                $created_by = $_POST['created_by'];
-                $role = $_POST['role'];
-                $password = $_POST['password'];
-                $profile_photo_file = $_POST['profile_photo_file'];
+                if(isset($_POST['global_token']) 
+                    && $_POST['global_token'] == $_SESSION['global_token']){
 
-                $authController->registerUser($name, $lastname, $email, $phone_number, $created_by, $role, $password, $profile_photo_file);
+                    $name = $_POST['name'];
+                    $lastname = $_POST['lastname'];
+                    $email = $_POST['email'];
+                    $phone_number = $_POST['phone_number'];
+                    $created_by = $_POST['created_by'];
+                    $role = $_POST['role'];
+                    $password = $_POST['password'];
+                    $profile_photo_file = $_POST['profile_photo_file'];
+
+                    $authController->registerUser($name, $lastname, $email, $phone_number, $created_by, $role, $password, $profile_photo_file);
+                
+                }
+
 
                 break;
 
             case 'forgotPassword':
 
+                if(isset($_POST['global_token']) 
+                    && $_POST['global_token'] == $_SESSION['global_token']){
+
                     $email = $_POST['email'];
 
                     $authController->forgotPassword($email);
-
+                }
                 break;
             
             case 'logout':
+
+                if(isset($_POST['global_token']) 
+                    && $_POST['global_token'] == $_SESSION['global_token']){
 
                     $email = $_POST['email'];
 
                     echo $email;
 
                     $authController->logout($email);
-
+                }
                 break;
             
             default:
