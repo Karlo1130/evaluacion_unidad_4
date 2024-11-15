@@ -17,6 +17,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
     <!-- [phosphor Icons] https://phosphoricons.com/ -->
     <link rel="stylesheet" href="<?= BASE_PATH ?>assets/fonts/phosphor/duotone/style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/phosphor-icons">
+
     <!-- [Tabler Icons] https://tablericons.com -->
     <link rel="stylesheet" href="<?= BASE_PATH ?>assets/fonts/tabler-icons.min.css" />
     <!-- [Feather Icons] https://feathericons.com -->

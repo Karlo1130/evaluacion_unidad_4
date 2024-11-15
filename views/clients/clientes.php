@@ -59,10 +59,18 @@
                   <li class="breadcrumb-item" aria-current="page">Clientes</li>
                 </ul>
               </div>
-              <div class="col-md-12">
+              <div class="col-md-6 ">
                 <div class="page-header-title">
-                  <h2 class="mb-0">Clientes</h2>
+                  <h2 class="mb-0">Clientes </h2>
                 </div>
+              </div>
+              <div class="col-md-6 d-flex">
+                <div class="d-flex ms-auto">
+                  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#login-modal"> <i class="ph-duotone ph-plus"></i>
+                  Agregar Cliente</button>
+                </div>
+              </div>
+
               </div>
             </div>
           </div>
@@ -74,6 +82,7 @@
         <div class="row">
           <!-- [ sample-page ] start -->
           <div class="col-sm-12">
+
             <div class="card border-0 table-card user-profile-list">
               <div class="card-body">
                 <div class="table-responsive">
@@ -298,23 +307,77 @@
         <!-- [ Main Content ] end -->
       </div>
     </div>
-    <!-- [ Main Content ] end -->
-    <footer class="pc-footer">
-      <div class="footer-wrapper container-fluid">
-        <div class="row">
-          <div class="col-sm-6 my-1">
-            <p class="m-0">Made with &#9829; by Team <a href="https://themeforest.net/user/phoenixcoded" target="_blank"> Phoenixcoded</a></p>
-          </div>
-          <div class="col-sm-6 ms-auto my-1">
-            <ul class="list-inline footer-link mb-0 justify-content-sm-end d-flex">
-              <li class="list-inline-item"><a href="../index.html">Home</a></li>
-              <li class="list-inline-item"><a href="https://pcoded.gitbook.io/light-able/" target="_blank">Documentation</a></li>
-              <li class="list-inline-item"><a href="https://phoenixcoded.support-hub.io/" target="_blank">Support</a></li>
-            </ul>
+    <div
+      class="modal fade login-modal"
+      id="login-modal"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content card mb-0 user-card">
+          <div class="modal-body">
+            <div class="d-flex mb-4">
+              <div class="flex-grow-1 me-3">
+                <h4 class="f-w-500 mb-1">Login with your email</h4>
+                <p class="mb-3"
+                  >Don't have an Account?<a href="#" class="link-primary ms-2" data-bs-toggle="modal" data-bs-target="#registration-modal"
+                    >Create Account</a
+                  ></p
+                >
+              </div>
+              <div class="flex-shrink-0">
+                <a href="#" class="avtar avtar-s btn-link-danger btn-pc-default" data-bs-dismiss="modal">
+                  <i class="ti ti-x f-20"></i>
+                </a>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email address</label>
+              <input type="email" class="form-control" placeholder="Email Address" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" placeholder="Password" />
+            </div>
+            <div class="d-flex mt-1 justify-content-between align-items-center">
+              <div class="form-check">
+                <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
+                <label class="form-check-label text-muted" for="customCheckc1">Remember me?</label>
+              </div>
+            </div>
+            <div class="d-grid mt-4">
+              <button type="button" class="btn btn-primary">Login</button>
+            </div>
+            <div class="saprator my-3">
+              <span>Or continue with</span>
+            </div>
+            <div class="text-center">
+              <ul class="list-inline mx-auto mt-3 mb-0">
+                <li class="list-inline-item">
+                  <a href="https://www.facebook.com/" class="avtar avtar-s rounded-circle bg-facebook" target="_blank">
+                    <i class="fab fa-facebook-f text-white"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="https://twitter.com/" class="avtar avtar-s rounded-circle bg-twitter" target="_blank">
+                    <i class="fab fa-twitter text-white"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="https://myaccount.google.com/" class="avtar avtar-s rounded-circle bg-googleplus" target="_blank">
+                    <i class="fab fa-google text-white"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-    </footer>
+    </div>
+    <!-- [ Main Content ] end -->
+    
  <!-- Required Js -->
 <script src="../assets/js/plugins/popper.min.js"></script>
 <script src="../assets/js/plugins/simplebar.min.js"></script>
