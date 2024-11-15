@@ -99,7 +99,7 @@ include '../../app/productController.php';
                           <div class="flex-shrink-0">
 
                             <!-- <button class="btn btn-danger" onclick="alert(<?php echo $tarjeta->id ?>)">Delete</button> -->
-                            <button class="btn btn-danger">Delete</button>
+                            <button class="btn btn-danger">Eliminar</button>
 
                             <!-- <a href="edit/<?php echo $tarjeta->slug ?>" class="btn btn-primary w-auto">editar</a> -->
                             <a href="edit/blusa-levis-manga-larga" class="btn btn-primary w-auto">Editar</a>
