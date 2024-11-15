@@ -4,7 +4,8 @@ RewriteEngine on
 
 #controladores
 RewriteRule ^auth?$ app/authController.php
-RewriteRule ^products/controller$ app/productController.php [L,QSA]
+RewriteRule ^products/controller$ app/productController.php
+RewriteRule ^products/edit/controller$ app/productController.php
 
 #páginas
 RewriteRule ^login?$ index.php
@@ -23,5 +24,9 @@ RewriteRule ^users/details_users/([^/]+)?$ views/users/details_users.php
 
 RewriteRule ^clients/?$ views/clients/clientes.php
 RewriteRule ^new_client/?$ views/clients/createClients.php
+
+RewriteRule ^orders/?$ views/orders/index.php
+RewriteRule ^orders/create/?$ views/orders/create.php
+RewriteRule ^orders/update/?$ views/orders/update.php
 
 
