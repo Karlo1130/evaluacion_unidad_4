@@ -43,7 +43,7 @@
               ></a>
               <ul class="pc-submenu">
                 <li class="pc-item"><a class="pc-link" href="<?= BASE_PATH ?>products/">Lista de productos</a></li>
-                <li class="pc-item"><a class="pc-link" href="../application/ecom_product-details.html">Añadir Producto</a></li>
+                <li class="pc-item"><a class="pc-link" href="<?= BASE_PATH ?>products/create">Añadir Producto</a></li>
                 
               </ul>
             </li>
@@ -68,16 +68,23 @@
             </li>
 
             <!-- orders -->
-            <li class="pc-item ">
+            <li class="pc-item pc-hasmenu">
               <a href="#!" class="pc-link">
                 <span class="pc-micon">
                   <i class="ph-duotone ph-newspaper"></i>
                 </span>
-                <span class="pc-mtext">Ordenes</span><span class="pc-arrow"></span
+                <span class="pc-mtext">Ordenes</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span
               ></a>
+              <ul class="pc-submenu">
+                 <li class="pc-item"><a class="pc-link" href="../admins/course-dashboard.html">Lista de ordenes</a></li>
+                 <li class="pc-item"><a class="pc-link" href="../admins/course-dashboard.html">Añadir Cliente</a></li>
               </ul> 
           
+              
+          
             </li>
+
+            
            
             
 
