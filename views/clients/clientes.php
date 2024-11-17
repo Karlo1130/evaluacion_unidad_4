@@ -2,6 +2,9 @@
   include_once "../../app/config.php";
   include '../../app/clientsController.php';
 
+
+  $clientes = $clientsController->get();
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -96,6 +99,7 @@
                       </tr>
                     </thead>
                     <tbody>
+                    <?php foreach ($clientes as $cliente): ?>
                       <tr>
                         <td>
                           <div class="d-inline-block align-middle">
@@ -106,13 +110,12 @@
                               style="width: 40px"
                             />
                             <div class="d-inline-block">
-                              <h6 class="m-b-0">Quinn Flynn</h6>
-                              <p class="m-b-0 text-primary">Android developer</p>
+                              <h6 class="m-b-0"><?php echo $cliente->name ?></h6>
                             </div>
                           </div>
                         </td>
-                        <td>Support Lead</td>
-                        <td>Edinburgh</td>
+                        <td><?php echo $cliente->email ?></td>
+                        <td><?php echo $cliente->phone_number ?></td>
                         <td>
                           <span >Acciones</span>
                           <div class="overlay-edit">
@@ -129,6 +132,8 @@
                       </tr>
                       
                       </tr>
+                      <?php endforeach; ?>
+
                     </tbody>
                   </table>
                 </div>
