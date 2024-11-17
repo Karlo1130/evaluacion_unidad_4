@@ -172,11 +172,11 @@
                           <li class="list-group-item px-0 pt-0">
                             <div class="row">
                               <div class="col-md-6">
-                                <p class="mb-1 text-muted">Full Name</p>
+                                <p class="mb-1 text-muted">Nombre completo</p>
                                 <p class="mb-0">Anshan Handgun</p>
                               </div>
                               <div class="col-md-6">
-                                <p class="mb-1 text-muted">Father Name</p>
+                                <p class="mb-1 text-muted">Correo electronico</p>
                                 <p class="mb-0">Mr. Deepen Handgun</p>
                               </div>
                             </div>
@@ -184,11 +184,11 @@
                           <li class="list-group-item px-0">
                             <div class="row">
                               <div class="col-md-6">
-                                <p class="mb-1 text-muted">Phone</p>
+                                <p class="mb-1 text-muted">Numero celular</p>
                                 <p class="mb-0">(+1-876) 8654 239 581</p>
                               </div>
                               <div class="col-md-6">
-                                <p class="mb-1 text-muted">Country</p>
+                                <p class="mb-1 text-muted">Ciudad</p>
                                 <p class="mb-0">New York</p>
                               </div>
                             </div>
@@ -199,62 +199,92 @@
                                 <p class="mb-1 text-muted">Email</p>
                                 <p class="mb-0">anshan.dh81@gmail.com</p>
                               </div>
-                              <div class="col-md-6">
-                                <p class="mb-1 text-muted">Zip Code</p>
-                                <p class="mb-0">956 754</p>
-                              </div>
-                            </div>
+                              
                           </li>
                           <li class="list-group-item px-0 pb-0">
-                            <p class="mb-1 text-muted">Address</p>
-                            <p class="mb-0">Street 110-B Kalians Bag, Dewan, M.P. New York</p>
+                            <p class="mb-1 text-muted">Direccion</p>
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <form>
+                                    <div class="mb-3">
+                                      <label class="form-label" for="exampleInputEmail1">Email address</label>
+                                      <input
+                                        type="email"
+                                        class="form-control"
+                                        id="exampleInputEmail1"
+                                        aria-describedby="emailHelp"
+                                        placeholder="Enter email"
+                                      />
+                                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    </div>
+                                    <div class="mb-3">
+                                      <label class="form-label" for="exampleInputPassword1">Password</label>
+                                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+                                      <label for="exampleCheck1">Check me out</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mb-4">Submit</button>
+                                  </form>
+                                </div>
+                                <div class="col-md-6">
+                                  <form>
+                                    <div class="mb-3">
+                                      <label class="form-label">Text</label>
+                                      <input type="text" class="form-control" placeholder="Text" />
+                                    </div>
+                                    <div class="mb-3">
+                                      <label class="form-label" for="exampleFormControlSelect1">Example select</label>
+                                      <select class="form-select" id="exampleFormControlSelect1">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                      </select>
+                                    </div>
+                                    <div class="mb-3">
+                                      <label class="form-label" for="exampleFormControlTextarea1">Example textarea</label>
+                                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
                           </li>
                         </ul>
                       </div>
                     </div>
                     <div class="card">
                       <div class="card-header">
-                        <h5>Education</h5>
+                        <h5>Ordenes</h5>
                       </div>
                       <div class="card-body">
-                        <ul class="list-group list-group-flush acc-feeds-list">
-                          <li class="list-group-item p-0">
-                            <div class="row">
-                              <div class="col-md-4 feed-title">
-                                <p class="mb-1 text-muted">Master Degree (Year)</p>
-                                <p class="mb-0">2014-2017</p>
-                              </div>
-                              <div class="col-md-6">
-                                <p class="mb-1 text-muted">Institute</p>
-                                <p class="mb-0">-</p>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="list-group-item p-0">
-                            <div class="row">
-                              <div class="col-md-4 feed-title">
-                                <p class="mb-1 text-muted">Bachelor (Year)</p>
-                                <p class="mb-0">2011-2013</p>
-                              </div>
-                              <div class="col-md-6">
-                                <p class="mb-1 text-muted">Institute</p>
-                                <p class="mb-0">Imperial College London</p>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="list-group-item p-0">
-                            <div class="row">
-                              <div class="col-md-4 feed-title">
-                                <p class="mb-1 text-muted">School (Year)</p>
-                                <p class="mb-0">2009-2011</p>
-                              </div>
-                              <div class="col-md-6">
-                                <p class="mb-1 text-muted">Institute</p>
-                                <p class="mb-0">School of London, England</p>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
+                      <div class="card-body table-border-style">
+                          <div class="table-responsive">
+                            <table class="table" id="pc-dt-simple">
+                              <thead>
+                                <tr>
+                                  <th>Folio</th>
+                                  <th>Fecha</th>
+                                  <th>Metodo de pago</th>
+                                  <th>Estatus</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>Unity Pugh</td>
+                                  <td>9958</td>
+                                  <td>Curicó</td>
+                                  <td>2005/02/11</td>
+                                </tr>
+                                
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     
