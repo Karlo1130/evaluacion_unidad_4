@@ -1,6 +1,6 @@
 <?php 
   include_once "../../app/config.php";
-
+  include '../../app/clientsController.php';
 
 ?>
 <!doctype html>
@@ -89,12 +89,10 @@
                   <table class="table table-hover" id="pc-dt-simple">
                     <thead>
                       <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Status</th>
+                        <th>Nombre</th>
+                        <th>Correo electronico</th>
+                        <th>Numero celular</th>
+                        
                       </tr>
                     </thead>
                     <tbody>
@@ -115,14 +113,12 @@
                         </td>
                         <td>Support Lead</td>
                         <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
                         <td>
-                          <span class="badge bg-light-success">Active</span>
+                          <span >Acciones</span>
                           <div class="overlay-edit">
                             <ul class="list-inline mb-0">
                               <li class="list-inline-item m-0"
-                                ><a href="#" class="avtar avtar-s btn btn-primary"><i class="ti ti-pencil f-18"></i></a
+                                ><a href="#" class="avtar avtar-s btn btn-primary" data-bs-toggle="modal" data-bs-target="#login-modal"><i class="ti ti-pencil f-18"></i></a
                               ></li>
                               <li class="list-inline-item m-0"
                                 ><a href="#" class="avtar avtar-s btn bg-white btn-link-danger"><i class="ti ti-trash f-18"></i></a
@@ -131,170 +127,7 @@
                           </div>
                         </td>
                       </tr>
-                      <tr>
-                        <td>
-                          <div class="d-inline-block align-middle">
-                            <img
-                              src="../assets/images/user/avatar-2.jpg"
-                              alt="user image"
-                              class="img-radius align-top m-r-15"
-                              style="width: 40px"
-                            />
-                            <div class="d-inline-block">
-                              <h6 class="m-b-0">Garrett Winters</h6>
-                              <p class="m-b-0 text-primary">Android developer</p>
-                            </div>
-                          </div>
-                        </td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>63</td>
-                        <td>2011/07/25</td>
-                        <td>
-                          <span class="badge bg-light-danger">Disabled</span>
-                          <div class="overlay-edit">
-                            <ul class="list-inline mb-0">
-                              <li class="list-inline-item m-0"
-                                ><a href="#" class="avtar avtar-s btn btn-primary"><i class="ti ti-pencil f-18"></i></a
-                              ></li>
-                              <li class="list-inline-item m-0"
-                                ><a href="#" class="avtar avtar-s btn bg-white btn-link-danger"><i class="ti ti-trash f-18"></i></a
-                              ></li>
-                            </ul>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="d-inline-block align-middle">
-                            <img
-                              src="../assets/images/user/avatar-3.jpg"
-                              alt="user image"
-                              class="img-radius align-top m-r-15"
-                              style="width: 40px"
-                            />
-                            <div class="d-inline-block">
-                              <h6 class="m-b-0">Ashton Cox</h6>
-                              <p class="m-b-0 text-primary">Android developer</p>
-                            </div>
-                          </div>
-                        </td>
-                        <td>Junior Technical Author</td>
-                        <td>San Francisco</td>
-                        <td>66</td>
-                        <td>2009/01/12</td>
-                        <td>
-                          <span class="badge bg-light-danger">Disabled</span>
-                          <div class="overlay-edit">
-                            <ul class="list-inline mb-0">
-                              <li class="list-inline-item m-0"
-                                ><a href="#" class="avtar avtar-s btn btn-primary"><i class="ti ti-pencil f-18"></i></a
-                              ></li>
-                              <li class="list-inline-item m-0"
-                                ><a href="#" class="avtar avtar-s btn bg-white btn-link-danger"><i class="ti ti-trash f-18"></i></a
-                              ></li>
-                            </ul>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="d-inline-block align-middle">
-                            <img
-                              src="../assets/images/user/avatar-4.jpg"
-                              alt="user image"
-                              class="img-radius align-top m-r-15"
-                              style="width: 40px"
-                            />
-                            <div class="d-inline-block">
-                              <h6 class="m-b-0">Cedric Kelly</h6>
-                              <p class="m-b-0 text-primary">Android developer</p>
-                            </div>
-                          </div>
-                        </td>
-                        <td>Senior Javascript Developer</td>
-                        <td>Edinburgh</td>
-                        <td>22</td>
-                        <td>2012/03/29</td>
-                        <td>
-                          <span class="badge bg-light-success">Active</span>
-                          <div class="overlay-edit">
-                            <ul class="list-inline mb-0">
-                              <li class="list-inline-item m-0"
-                                ><a href="#" class="avtar avtar-s btn btn-primary"><i class="ti ti-pencil f-18"></i></a
-                              ></li>
-                              <li class="list-inline-item m-0"
-                                ><a href="#" class="avtar avtar-s btn bg-white btn-link-danger"><i class="ti ti-trash f-18"></i></a
-                              ></li>
-                            </ul>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="d-inline-block align-middle">
-                            <img
-                              src="../assets/images/user/avatar-4.jpg"
-                              alt="user image"
-                              class="img-radius align-top m-r-15"
-                              style="width: 40px"
-                            />
-                            <div class="d-inline-block">
-                              <h6 class="m-b-0">Airi Satou</h6>
-                              <p class="m-b-0 text-primary">Android developer</p>
-                            </div>
-                          </div>
-                        </td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>33</td>
-                        <td>2008/11/28</td>
-                        <td>
-                          <span class="badge bg-light-success">Active</span>
-                          <div class="overlay-edit">
-                            <ul class="list-inline mb-0">
-                              <li class="list-inline-item m-0"
-                                ><a href="#" class="avtar avtar-s btn btn-primary"><i class="ti ti-pencil f-18"></i></a
-                              ></li>
-                              <li class="list-inline-item m-0"
-                                ><a href="#" class="avtar avtar-s btn bg-white btn-link-danger"><i class="ti ti-trash f-18"></i></a
-                              ></li>
-                            </ul>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="d-inline-block align-middle">
-                            <img
-                              src="../assets/images/user/avatar-5.jpg"
-                              alt="user image"
-                              class="img-radius align-top m-r-15"
-                              style="width: 40px"
-                            />
-                            <div class="d-inline-block">
-                              <h6 class="m-b-0">Brielle Williamson</h6>
-                              <p class="m-b-0 text-primary">Android developer</p>
-                            </div>
-                          </div>
-                        </td>
-                        <td>Integration Specialist</td>
-                        <td>New York</td>
-                        <td>61</td>
-                        <td>2012/12/02</td>
-                        <td>
-                          <span class="badge bg-light-danger">Disabled</span>
-                          <div class="overlay-edit">
-                            <ul class="list-inline mb-0">
-                              <li class="list-inline-item m-0"
-                                ><a href="#" class="avtar avtar-s btn btn-primary"><i class="ti ti-pencil f-18"></i></a
-                              ></li>
-                              <li class="list-inline-item m-0"
-                                ><a href="#" class="avtar avtar-s btn bg-white btn-link-danger"><i class="ti ti-trash f-18"></i></a
-                              ></li>
-                            </ul>
-                          </div>
-                        </td>
+                      
                       </tr>
                     </tbody>
                   </table>
@@ -320,12 +153,8 @@
           <div class="modal-body">
             <div class="d-flex mb-4">
               <div class="flex-grow-1 me-3">
-                <h4 class="f-w-500 mb-1">Login with your email</h4>
-                <p class="mb-3"
-                  >Don't have an Account?<a href="#" class="link-primary ms-2" data-bs-toggle="modal" data-bs-target="#registration-modal"
-                    >Create Account</a
-                  ></p
-                >
+                <h4 class="f-w-500 mb-1">Agregar nuevo cliente</h4>
+                
               </div>
               <div class="flex-shrink-0">
                 <a href="#" class="avtar avtar-s btn-link-danger btn-pc-default" data-bs-dismiss="modal">
@@ -333,45 +162,34 @@
                 </a>
               </div>
             </div>
-            <div class="mb-3">
-              <label class="form-label">Email address</label>
-              <input type="email" class="form-control" placeholder="Email Address" />
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Password</label>
-              <input type="password" class="form-control" placeholder="Password" />
-            </div>
-            <div class="d-flex mt-1 justify-content-between align-items-center">
-              <div class="form-check">
-                <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
-                <label class="form-check-label text-muted" for="customCheckc1">Remember me?</label>
+            <form action="">
+
+              <div class="mb-3">
+                <label class="form-label">Nombre completo</label>
+                <input type="name" required class="form-control" placeholder="Ingresa tu nombre completo" />
               </div>
-            </div>
-            <div class="d-grid mt-4">
-              <button type="button" class="btn btn-primary">Login</button>
-            </div>
-            <div class="saprator my-3">
-              <span>Or continue with</span>
-            </div>
-            <div class="text-center">
-              <ul class="list-inline mx-auto mt-3 mb-0">
-                <li class="list-inline-item">
-                  <a href="https://www.facebook.com/" class="avtar avtar-s rounded-circle bg-facebook" target="_blank">
-                    <i class="fab fa-facebook-f text-white"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="https://twitter.com/" class="avtar avtar-s rounded-circle bg-twitter" target="_blank">
-                    <i class="fab fa-twitter text-white"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="https://myaccount.google.com/" class="avtar avtar-s rounded-circle bg-googleplus" target="_blank">
-                    <i class="fab fa-google text-white"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
+              <div class="mb-3">
+                <label class="form-label">Correo electronico</label>
+                <input type="email" required class="form-control" placeholder="ejemplo@email.com" />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Contraseña</label>
+                <input type="password"  required class="form-control" placeholder="Ingresa una contraseña" />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Confirmar contraseña</label>
+                <input type="password" class="form-control" placeholder="Ingresa una contraseña" />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Numero Celular</label>
+                <input type="tel" required class="form-control" placeholder="00-000-0000" />
+              </div>
+              
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary">Login</button>
+              </div>
+            </form>
+            
           </div>
         </div>
       </div>
