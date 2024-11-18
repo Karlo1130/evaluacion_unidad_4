@@ -45,7 +45,7 @@ include '../../app/productController.php';
           <div class="row align-items-center">
             <div class="col-md-12">
               <div class="page-header-title">
-                <h2 class="mb-0">List</h2>
+                <h2 class="mb-0">Ordenes</h2>
               </div>
             </div>
           </div>
@@ -62,10 +62,11 @@ include '../../app/productController.php';
             <div class="card-body">
               <div class="row justify-content-between ali mb-3 g-3">
                 <div class="col-sm-auto">
-                  <form class="form-search">
-                    <i class="ph-duotone ph-magnifying-glass icon-search"></i>
-                    <input type="search" class="form-control" placeholder="Search..." />
-                    <button class="btn btn-light-secondary btn-search">Search</button>
+                  <h4>Busca ordenes entre estas fechas</h4>
+                  <form class="form-search p-2">
+                    <input type="date" class="form-control" name="" id="">
+                    <input type="date" class="form-control" name="" id="">
+                    <button class="btn btn-light-secondary" >Buscar</button>
                   </form>
                 </div>
               </div>
@@ -79,7 +80,7 @@ include '../../app/productController.php';
                       <th>Direccion</th>
                       <th class="text-center">Estado de la orden</th>
                       <th class="text-center">Metodo de pago</th>
-                      <th></th>
+                      <th class="text-end">Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -101,7 +102,19 @@ include '../../app/productController.php';
                       <td class="text-center">10</td>
                       <td class="text-center"><img src="../assets/images/application/img-mastercard.svg" alt="img"
                           class="img-fluid" /></td>
-                      <td class="text-center"><i class="ph-duotone ph-caret-down f-24"></i></td>
+                          <td class="text-end">
+                              <ul class="list-inline mb-0">
+                                <li class="list-inline-item"
+                                  ><a href="orders/1" class="avtar avtar-s btn-link-info btn-pc-default"><i class="ti ti-eye f-20"></i></a
+                                ></li>
+                                <li class="list-inline-item"
+                                  ><a href="update" class="avtar avtar-s btn-link-success btn-pc-default"><i class="ti ti-edit f-20"></i></a
+                                ></li>
+                                <li class="list-inline-item"
+                                  ><button class="avtar avtar-s btn-link-danger btn-pc-default"><i class="ti ti-trash f-20"></i></
+                                ></li>
+                              </ul>
+                            </td>
                     </tr>
                   </tbody>
                 </table>
