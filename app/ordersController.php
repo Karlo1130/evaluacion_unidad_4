@@ -3,6 +3,16 @@
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
+
+    if(!isset($_SESSION['data'])){
+
+        $_SESSION['message_type'] = "error";
+        $_SESSION['message'] = "Variables de session no inicializadas";
+
+        header("Location: " . BASE_PATH . "login");
+        exit;
+    }
+
     $ordersController = new OrdersController();
     if(isset($_POST["action"])) {
         if(isset($_POST['global_token']) 

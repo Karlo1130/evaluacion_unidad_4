@@ -4,6 +4,15 @@
         session_start();
     }
 
+    if(!isset($_SESSION['data'])){
+
+        $_SESSION['message_type'] = "error";
+        $_SESSION['message'] = "Variables de session no inicializadas";
+
+        header("Location: " . BASE_PATH . "login");
+        exit;
+    }
+
     $presentationController = new PresentationController();
 
     if(isset($_POST["action"])) {
