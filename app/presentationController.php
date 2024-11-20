@@ -162,7 +162,6 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                header("Location: ".BASE_PATH."products/");
                 exit;
             }
 
@@ -215,7 +214,6 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                header("Location: ".BASE_PATH."products/");
                 exit;
             }
 
@@ -262,7 +260,6 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                header("Location: ".BASE_PATH."products/");
                 exit;
             }
 
@@ -309,7 +306,6 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                header("Location: ".BASE_PATH."products/");
                 exit;
             }
 
@@ -354,7 +350,6 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                header("Location: ".BASE_PATH."products/");
                 exit;
             }
 
