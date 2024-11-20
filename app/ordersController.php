@@ -1,5 +1,7 @@
 <?php
     
+    include_once "config.php";
+
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
@@ -138,6 +140,8 @@
             if (!$response) {
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
+
+                header("Location: " . BASE_PATH . "orders");
                 exit;
             }
             
@@ -149,6 +153,9 @@
             } else {
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = $response->message;
+
+                header("Location: " . BASE_PATH . "orders");
+                
             }
 
             if (is_array($response->data)) {
@@ -185,6 +192,8 @@
             if (!$response) {
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
+
+                header("Location: " . BASE_PATH . "orders");
                 exit;
             }
             
@@ -196,6 +205,10 @@
             } else {
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = $response->message;
+
+                header("Location: " . BASE_PATH . "orders");
+
+
             }
 
             if (is_object($response->data)) {
@@ -264,6 +277,8 @@
             if ($response->code == 4) {
                 $_SESSION['message_type'] = "success";
                 $_SESSION['message'] = $response->message;
+
+                header("Location: " . BASE_PATH . "orders");
             } else {
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = $response->message;
@@ -309,6 +324,8 @@
             if ($response->code == 4) {
                 $_SESSION['message_type'] = "success";
                 $_SESSION['message'] = $response->message;
+
+                header("Location: " . BASE_PATH . "orders");
             } else {
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = $response->message;
@@ -343,7 +360,6 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                header("Location: ".BASE_PATH."products/");
                 exit;
             }
 
@@ -354,6 +370,8 @@
             if ($response->code == 2) {
                 $_SESSION['message_type'] = "success";
                 $_SESSION['message'] = $response->message;
+
+                header("Location: " . BASE_PATH . "orders");
             } else {
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = $response->message;
