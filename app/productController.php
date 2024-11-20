@@ -75,7 +75,8 @@
                     } else {
                         $_SESSION['message'] = "Hubo un error al editar el producto (no se el id del producto)";
                         $_SESSION['message_type'] = "error";
-                        header("Location: ".BASE_PATH."products/");
+                        // ? no seguro de si se ocupa la redireccion en este caso
+                        // header("Location: " . BASE_PATH . "products");
                     }
 
                     break;
@@ -157,7 +158,7 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                header("Location: ".BASE_PATH."products/");
+                header("Location: " . BASE_PATH . "products");
                 exit;
             }
 
@@ -205,7 +206,7 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                header("Location: ".BASE_PATH."products/");
+                header("Location: " . BASE_PATH . "products");
                 exit;
             }
 
@@ -254,7 +255,7 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                header("Location: ".BASE_PATH."products/");
+                header("Location: " . BASE_PATH . "products");
                 exit;
             }
 
@@ -345,7 +346,7 @@
                 $_SESSION['message_type'] = "error";
             }
             
-            header("Location: ".BASE_PATH."products/");
+            header("Location: " . BASE_PATH . "products");
             exit;
         }
 
@@ -416,7 +417,7 @@
                 $_SESSION['message'] = "Hubo un error al editar el producto";
                 $_SESSION['message_type'] = "error";
             }
-            header("Location: ".BASE_PATH."products/");
+            header("Location: " . BASE_PATH . "products");
         }
 
         function delete($productId = null) : void {
@@ -458,7 +459,7 @@
                 $_SESSION['message'] = "Hubo un error al editar el producto";
                 $_SESSION['message_type'] = "error";
             }
-            header("Location: ".BASE_PATH."products/");
+            header("Location: " . BASE_PATH . "products");
             
         }
 
