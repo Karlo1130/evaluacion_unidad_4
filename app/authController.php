@@ -106,10 +106,11 @@
                 $_SESSION['global_token'] = $global_token;
                 $_SESSION['message_type'] = "success";
 
-                header("Location: home");
+                header("Location: " . BASE_PATH . "products");
             } else {
                 $_SESSION['message_type'] = "error";
-                header("Location: login");
+                header("Location: " . BASE_PATH . "login");
+
             }
             $_SESSION['message'] = $response->message;
 
@@ -145,8 +146,8 @@
             }
             $_SESSION['message'] = $response->message;
 
-            //TODO: cambiar la redireccion a al pantalla correspondiente
-            header("Location:  home");
+            // ? sin pantalla a la que rederigir
+            // header("Location:  home");
 
         }
 
@@ -235,8 +236,8 @@
             }
             $_SESSION['message'] = $response->message;
 
-            //TODO: cambiar la redireccion a al pantalla correspondiente
-            // header("Location: home");
+            header("Location: " . BASE_PATH . "lofin");
+
         }
     }
 

@@ -98,8 +98,9 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                //TODO: cambiar la redireccion a al pantalla correspondiente
-                // header("Location: home");
+                // ?redireccionarlo a donde si no se obtiene respuesta
+                // header("Location: " . BASE_PATH . "?");
+
                 exit;
             }
 
@@ -151,8 +152,8 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                //TODO: cambiar la redireccion a al pantalla correspondiente
-                // header("Location: home");
+                // ?redireccionarlo a donde si no se obtiene respuesta
+                // header("Location: " . BASE_PATH . "?");
                 exit;
             }
 
@@ -200,8 +201,8 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                //TODO: cambiar la redireccion a al pantalla correspondiente
-                // header("Location: home");
+                // ?redireccionarlo a donde si no se obtiene respuesta
+                // header("Location: " . BASE_PATH . "?");
                 exit;
             }
 
@@ -247,8 +248,8 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                //TODO: cambiar la redireccion a al pantalla correspondiente
-                // header("Location: home");
+                // ?redireccionarlo a donde si no se obtiene respuesta
+                // header("Location: " . BASE_PATH . "?");
                 exit;
             }
 
