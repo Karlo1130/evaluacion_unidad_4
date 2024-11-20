@@ -1,7 +1,18 @@
 <?php
 
+    include_once "config.php";
+
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
+    }
+
+    if(!isset($_SESSION['data'])){
+
+        $_SESSION['message_type'] = "error";
+        $_SESSION['message'] = "Variables de session no inicializadas";
+
+        header("Location: " . BASE_PATH . "login");
+        exit;
     }
 
     $clientsController = new ClientsController();
@@ -82,9 +93,6 @@
             if (!$response) {
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
-
-                //TODO: cambiar la redireccion a al pantalla correspondiente
-                // header("Location: home");
                 exit;
             }
 
@@ -129,8 +137,8 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                //TODO: cambiar la redireccion a al pantalla correspondiente
-                // header("Location: home");
+                header("Location: " . BASE_PATH . "clients");
+
                 exit;
             }
 
@@ -142,6 +150,8 @@
             } else {
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = $response->message;
+
+                header("Location: " . BASE_PATH . "clients");
             }
 
             return $response->data;
@@ -176,8 +186,6 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
                 
-                //TODO: cambiar la redireccion a al pantalla correspondiente
-                // header("Location: home");
                 exit;
             }
             
@@ -186,10 +194,15 @@
             if ($response->code == 4) {
                 $_SESSION['message_type'] = "success";
                 $_SESSION['message'] = $response->message;
+
+                header("Location: " . BASE_PATH . "clients");
+
+                
             } else {
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = $response->message;
             }
+
         }
 
         function update($name = null, $email = null, $password = null, $phone_number = null, $is_suscribed = null, $level_id = null, $id = null) : void {
@@ -222,8 +235,6 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
                 
-                //TODO: cambiar la redireccion a al pantalla correspondiente
-                // header("Location: home");
                 exit;
             }
             
@@ -232,6 +243,9 @@
             if ($response->code == 4) {
                 $_SESSION['message_type'] = "success";
                 $_SESSION['message'] = $response->message;
+
+                header("Location: " . BASE_PATH . "clients");
+
             } else {
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = $response->message;
@@ -266,8 +280,6 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
                 
-                //TODO: cambiar la redireccion a al pantalla correspondiente
-                // header("Location: home");
                 exit;
             }
             
@@ -276,6 +288,9 @@
             if ($response->code == 2) {
                 $_SESSION['message_type'] = "success";
                 $_SESSION['message'] = $response->message;
+
+                header("Location: " . BASE_PATH . "clients");
+
             } else {
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = $response->message;

@@ -1,7 +1,18 @@
 <?php
     
+    include_once "config.php";
+
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
+    }
+
+    if(!isset($_SESSION['data'])){
+
+        $_SESSION['message_type'] = "error";
+        $_SESSION['message'] = "Variables de session no inicializadas";
+
+        header("Location: " . BASE_PATH . "login");
+        exit;
     }
 
     $presentationController = new PresentationController();
@@ -153,7 +164,6 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                header("Location: ".BASE_PATH."products/");
                 exit;
             }
 
@@ -206,7 +216,6 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                header("Location: ".BASE_PATH."products/");
                 exit;
             }
 
@@ -253,7 +262,6 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                header("Location: ".BASE_PATH."products/");
                 exit;
             }
 
@@ -300,7 +308,6 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                header("Location: ".BASE_PATH."products/");
                 exit;
             }
 
@@ -345,7 +352,6 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                header("Location: ".BASE_PATH."products/");
                 exit;
             }
 

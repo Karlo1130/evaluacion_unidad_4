@@ -1,7 +1,18 @@
 <?php
 
+    include_once "config.php";
+
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
+    }
+
+    if(!isset($_SESSION['data'])){
+
+        $_SESSION['message_type'] = "error";
+        $_SESSION['message'] = "Variables de session no inicializadas";
+
+        header("Location: " . BASE_PATH . "login");
+        exit;
     }
 
     $addressController = new AddressController();
@@ -89,8 +100,9 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                //TODO: cambiar la redireccion a al pantalla correspondiente
-                // header("Location: home");
+                // ?redireccionarlo a donde si no se obtiene respuesta
+                // header("Location: " . BASE_PATH . "?");
+
                 exit;
             }
 
@@ -142,8 +154,8 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                //TODO: cambiar la redireccion a al pantalla correspondiente
-                // header("Location: home");
+                // ?redireccionarlo a donde si no se obtiene respuesta
+                // header("Location: " . BASE_PATH . "?");
                 exit;
             }
 
@@ -191,8 +203,8 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                //TODO: cambiar la redireccion a al pantalla correspondiente
-                // header("Location: home");
+                // ?redireccionarlo a donde si no se obtiene respuesta
+                // header("Location: " . BASE_PATH . "?");
                 exit;
             }
 
@@ -238,8 +250,8 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = "no se obtuvo una respuesta";
 
-                //TODO: cambiar la redireccion a al pantalla correspondiente
-                // header("Location: home");
+                // ?redireccionarlo a donde si no se obtiene respuesta
+                // header("Location: " . BASE_PATH . "?");
                 exit;
             }
 

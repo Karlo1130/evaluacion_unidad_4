@@ -28,5 +28,5 @@ RewriteRule clients/detail/?$ views/clients/clientDetail.php
 RewriteRule ^orders/?$ views/orders/index.php
 RewriteRule ^orders/create/?$ views/orders/create.php
 RewriteRule ^orders/update/?$ views/orders/update.php
-
+RewriteRule ^orders/([^/]+)/?$ views/orders/details.php?id=$1
 
