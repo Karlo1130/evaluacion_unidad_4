@@ -119,7 +119,7 @@
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://crud.jonathansoto.mx/api/clients/4',
+            CURLOPT_URL => 'https://crud.jonathansoto.mx/api/clients/'.$_GET['id'],
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
