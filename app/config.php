@@ -4,7 +4,7 @@
 	}
 	
 	if (!defined('BASE_PATH')) {
-      define('BASE_PATH','http://localhost/evaluacion_unidad_4/');
+      define('BASE_PATH','https://examenunidad4jona-aa9c17fa4660.herokuapp.com/');
    	}
 
 ?>
