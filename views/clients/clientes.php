@@ -95,6 +95,7 @@
                         <th>Nombre</th>
                         <th>Correo electronico</th>
                         <th>Numero celular</th>
+                        <th>Acciones</th>
                         
                       </tr>
                     </thead>
@@ -103,12 +104,7 @@
                       <tr>
                         <td>
                           <div class="d-inline-block align-middle">
-                            <img
-                              src="../assets/images/user/avatar-1.jpg"
-                              alt="user image"
-                              class="img-radius align-top m-r-15"
-                              style="width: 40px"
-                            />
+                       
                             <div class="d-inline-block">
                               <h6 class="m-b-0"><?php echo $cliente->name ?></h6>
                             </div>
@@ -117,8 +113,7 @@
                         <td><?php echo $cliente->email ?></td>
                         <td><?php echo $cliente->phone_number ?></td>
                         <td>
-                          <span >Acciones</span>
-                          <div class="overlay-edit">
+                          <div>
                             <ul class="list-inline mb-0">
                               <li class="list-inline-item m-0">
                               <a href="#" 
@@ -142,6 +137,13 @@
                                   <i class="ti ti-trash f-18"></i>
                                 </a>
                               </li>
+                              <li class="list-inline-item m-0">
+                                <a href="<?php echo  $cliente->id; ?>" class="avtar avtar-s btn btn-success">
+                                  <i class="ti ti-eye f-18"></i>
+                                </a>
+                              </li>
+
+                              
 
                             </ul>
                           </div>
