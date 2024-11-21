@@ -221,6 +221,7 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = $response->message;
             }
+            header("Location: " . BASE_PATH . "clients");
             
         }
 
@@ -268,6 +269,8 @@
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = $response->message;
             }
+
+            header("Location: " . BASE_PATH . "clients");
             
         }
     }
