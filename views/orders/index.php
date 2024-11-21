@@ -1,10 +1,9 @@
 <?php
 include_once "../../app/config.php";
-include '../../app/productController.php';
+include '../../app/ordersController.php';
 
-// $productos = $productController->get();
+$orders = $ordersController->get();
 
-//*obtener los datos de data con data-> en vez de data['']
 
 ?>
 <!doctype html>
@@ -61,20 +60,14 @@ include '../../app/productController.php';
           <div class="card">
             <div class="card-body">
               <div class="row mb-3 g-3">
-                <h4>Busca ordenes entre estas fechas</h4>
-                <div class="col-6">
-                  <form class="form-search p-2">
-                    <input type="date" class="form-control" name="" id="">
-                    <input type="date" class="form-control" name="" id="">
-                    <a class="btn btn-light-secondary">Buscar</a>
-                  </form>
-                </div>
-                <div class="col-5"></div>
-                <div class="col-1">
+                
+                <div class="col-5">
                   <form action="">
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createOrderModal">Crear orden</button>
                   </form>
+
                 </div>
+                
               </div>
               <div class="table-responsive">
                 <table class="table table-hover mb-0">
@@ -90,33 +83,51 @@ include '../../app/productController.php';
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <div class="row align-items-center">
-                          <div class="col-auto pe-0">
-                            <img src="../assets/images/user/avatar-1.jpg" alt="user-image"
-                              class="wid-40 rounded-circle" />
+                  <?php foreach ($orders as $order): ?>
+                      <tr>
+                        <td>
+                          <div class="row align-items-center">
+                            
+                            <div class="col">
+                              <h5 class="mb-0"><?php echo $order->client->name ?? 'sin nombre'; ?></h5>
+                            </div>
                           </div>
-                          <div class="col">
-                            <h5 class="mb-0">Addie Bass</h5>
-                          </div>
-                        </div>
-                      </td>
-                      <td><i class="ph-duotone ph-x-circle text-danger f-24"></i></td>
-                      <td>$20,000</td>
-                      <td>#63579067848912</td>
-                      <td class="text-center">10</td>
-                      <td class="text-center"><img src="../assets/images/application/img-mastercard.svg" alt="img"
-                          class="img-fluid" /></td>
-                      <td class="text-end">
-                        <ul class="list-inline mb-0">
-                          <li class="list-inline-item"><a href="orders/1" class="avtar avtar-s btn-link-info btn-pc-default"><i class="ti ti-eye f-20"></i></a></li>
-                          <li class="list-inline-item"><a href="#" class="avtar avtar-s btn-link-success btn-pc-default" data-bs-toggle="modal" data-bs-target="#updateOrderModal"><i class="ti ti-edit f-20"></i></a></li>
-                          <li class="list-inline-item"><button class="avtar avtar-s btn-link-danger btn-pc-default"><i class="ti ti-trash f-20"></i></>
-                          </li>
-                        </ul>
-                      </td>
-                    </tr>
+                        </td>
+                        <td>
+                          <?php if ($order->is_paid): ?>
+                            <i class="ph-duotone ph-check-circle text-success f-24"></i>
+                          <?php else: ?>
+                            <i class="ph-duotone ph-x-circle text-danger f-24"></i>
+                          <?php endif; ?>
+                        </td>
+                        <td>$<?php echo number_format($order->total, 2); ?></td>
+                        <td>#<?php echo $order->folio ?? 'sin folio'; ?></td>
+                        <td class="text-center"><?php echo $order->address_id ?? ''; ?></td>
+                        <td class="text-center">
+                        <?php echo $order->payment_type_id ; ?>
+                        </td>
+                        <td class="text-end">
+                          <ul class="list-inline mb-0">
+                            <li class="list-inline-item">
+                              <a href="orders/<?php echo $order->id; ?>" class="avtar avtar-s btn-link-info btn-pc-default">
+                                <i class="ti ti-eye f-20"></i>
+                              </a>
+                            </li>
+                            <li class="list-inline-item">
+                              <a href="#" class="avtar avtar-s btn-link-success btn-pc-default" data-bs-toggle="modal" data-bs-target="#updateOrderModal">
+                                <i class="ti ti-edit f-20"></i>
+                              </a>
+                            </li>
+                            <li class="list-inline-item">
+                              <button class="avtar avtar-s btn-link-danger btn-pc-default">
+                                <i class="ti ti-trash f-20"></i>
+                              </button>
+                            </li>
+                          </ul>
+                        </td>
+                      </tr>
+                      <?php endforeach; ?>
+
                   </tbody>
                 </table>
               </div>

@@ -21,16 +21,7 @@
               <label>Navigation</label>
               <i class="ph-duotone ph-gauge"></i>
             </li>
-            <li class="pc-item ">
-              <a href="#!" class="pc-link">
-                <span class="pc-micon">
-                  <i class="ph-duotone ph-gauge"></i>
-                </span>
-                <span class="pc-mtext">Dashboard</span>
-                <span class="pc-badge">2</span>
-              </a>
-              
-            </li>
+            
 
             
             <!-- products -->
@@ -75,8 +66,7 @@
                 <span class="pc-mtext">Ordenes</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span
               ></a>
               <ul class="pc-submenu">
-                 <li class="pc-item"><a class="pc-link" href="../admins/course-dashboard.html">Lista de ordenes</a></li>
-                 <li class="pc-item"><a class="pc-link" href="../admins/course-dashboard.html">Añadir Cliente</a></li>
+                 <li class="pc-item"><a class="pc-link" href="orders">Lista de ordenes</a></li>
               </ul> 
           
               

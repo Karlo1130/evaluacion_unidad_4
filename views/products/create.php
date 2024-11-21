@@ -1,8 +1,14 @@
 <?php
 include_once "../../app/config.php";
 include_once "../../app/brandController.php";
+include_once "../../app/categoriesController.php";
+include_once "../../app/tagsController.php";
 
-// $brands = $brandController->getBrands();
+$brands = $brandController->get();
+$category = $categoriesController->get();
+$tag = $tagsController->get();
+
+#var_dump($_POST);
 
 ?>
 <!doctype html>
@@ -64,12 +70,14 @@ include_once "../../app/brandController.php";
               <h5>Datos del nuevo producto</h5>
             </div>
             <div class="card-body">
-              <form method="POST" action="controller" class="p-3" enctype="multipart/form-data">
+              <form method="POST" action="create" class="p-3" enctype="multipart/form-data">
+              <input type="hidden" name="action" value="create">
+              <input type="hidden" name="global_token" value="<?php echo $_SESSION['global_token']; ?>">
                 <div class="row">
                   <!-- Primera columna -->
                   <div class="col-md-6">
                     <h5>Nombre</h5>
-                    <input type="text" class="form-control" required name="name">
+                    <input type="text"  class="form-control" required name="name">
 
                     <h5>Slug</h5>
                     <input type="text" class="form-control" required name="slug">
@@ -85,27 +93,31 @@ include_once "../../app/brandController.php";
                   <div class="col-md-6">
                     <h5>Marca</h5>
                     <select class="form-control" required name="brand_id">
-                      <?php foreach ([''] as $brand): ?>
-                        <option value="id">Nombre de Brand</option>
+                      <?php foreach ($brands as $brand): ?>
+                        <option value="<?php echo $brand->id ?>"><?php echo $brand->name ?></option>
                       <?php endforeach; ?>
                     </select>
 
                     <h5>Imagen</h5>
                     <input type="file" class="form-control" required name="cover">
 
-                    <h5>Categorias</h5>
-                    <select class="form-control" required name="category_id">
-                      <?php foreach ([''] as $category): ?>
-                        <option value="id">Nombre de Category</option>
+                    <h5>Categorías</h5>
+                    <select class="form-control" required name="categories[]">
+                      <?php foreach ($category as $category): ?>
+                        <option value="<?php echo $category->name; ?>"><?php echo $category->name; ?></option>
                       <?php endforeach; ?>
                     </select>
 
+
                     <h5>Tags</h5>
-                    <select class="form-control" required name="tag_id">
-                      <?php foreach ([''] as $tag): ?>
-                        <option value="id">Nombre de Tags</option>
+                    <select class="form-control" required name="tags[]">
+                      <?php foreach ($tag as $tag): ?>
+                        <option value="<?php echo $tag->name; ?>"><?php echo $tag->name; ?></option>
                       <?php endforeach; ?>
                     </select>
+
+
+
                   </div>
                 </div>
 
