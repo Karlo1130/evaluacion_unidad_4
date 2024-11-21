@@ -166,10 +166,12 @@
             if ($response->code == 4) {
                 $_SESSION['message_type'] = "success";
                 $_SESSION['message'] = $response->message;
+
             } else {
                 $_SESSION['message_type'] = "error";
                 $_SESSION['message'] = $response->message;
             }
+            header("Location: " . BASE_PATH . "clients/".$client_id);
         }
 
         function update($first_name = null, $last_name = null, $street_and_use_number = null, $postal_code = null, $city = null, $province = null, $phone_number = null, $is_billing_address = null, $client_id = null, $id = null) : void {
