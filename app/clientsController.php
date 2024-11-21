@@ -55,7 +55,11 @@
                     $clientsController->update($name, $email, $password, $phone_number, $is_suscribed, $level_id, $id);
                     break;
                 case 'delete':
+
+                    $id = $_POST['id'];
                         
+                    $clientsController->delete($id);
+
                     break;
                 
                 default:
