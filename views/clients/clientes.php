@@ -135,9 +135,14 @@
                               </a>
 
                               </li>
-                              <li class="list-inline-item m-0"
-                                ><a href="#" class="avtar avtar-s btn bg-white btn-link-danger"><i class="ti ti-trash f-18"></i></a
-                              ></li>
+                              <li class="list-inline-item m-0">
+                                <a href="#" 
+                                  class="eliminar avtar avtar-s btn bg-white btn-link-danger" 
+                                  data-id="<?php echo $cliente->id; ?>">
+                                  <i class="ti ti-trash f-18"></i>
+                                </a>
+                              </li>
+
                             </ul>
                           </div>
                         </td>
@@ -158,7 +163,18 @@
       </div>
     </div>
 
+
+    <form id="delete-form" method="POST" action="clients">
+      <input type="hidden" name="clients" value="delete">
+      <input type="hidden" name="id" id="delete-id">
+      <input type="hidden" name="global_token" value="<?php echo $_SESSION['global_token']; ?>">
+    </form>
+
     <!-- [modal agregar] -->
+
+      
+
+    </div>
 
     <div
       class="modal fade login-modal"
@@ -340,6 +356,19 @@
 <script src="../assets/js/plugins/feather.min.js"></script>
 
 <script>
+  document.querySelectorAll('.eliminar').forEach(function (button) {
+    button.addEventListener('click', function (event) {
+        event.preventDefault(); 
+
+        const clientId = this.getAttribute('data-id'); 
+        if (confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
+            
+            document.getElementById('delete-id').value = clientId;
+            document.getElementById('delete-form').submit();
+        }
+    });
+});
+
  document.querySelectorAll('.editar').forEach(function (button) {
     button.addEventListener('click', function () {
         const id = this.getAttribute('data-id');
